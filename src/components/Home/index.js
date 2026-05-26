@@ -1,60 +1,56 @@
-import { useState, useRef, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/router";
 import {
-  Scene, BgImage, Overlay, DustParticle,
-  Navbar, MusicBtn, BartenderWrap, Counter, DialogBox
-} from './elements'
-
+  Scene,
+  BgImage,
+  Overlay,
+  DustParticle,
+  Navbar,
+  MusicBtn,
+  BartenderWrap,
+  Counter,
+  DialogBox,
+} from "./elements";
+import { useMusic } from "../../pages/_app";
 const DUST = [
-  { left: '18%', top: '72%', size: '3px', duration: '9s',  delay: '0s' },
-  { left: '40%', top: '68%', size: '2px', duration: '12s', delay: '3s' },
-  { left: '65%', top: '74%', size: '3px', duration: '8s',  delay: '5s' },
-  { left: '82%', top: '70%', size: '2px', duration: '11s', delay: '1s' },
-  { left: '52%', top: '76%', size: '2px', duration: '10s', delay: '7s' },
-]
+  { $left: "10%", $top: "70%", $size: "4px", $duration: "7s", $delay: "0s" },
+  { $left: "20%", $top: "60%", $size: "3px", $duration: "9s", $delay: "1s" },
+  { $left: "30%", $top: "75%", $size: "5px", $duration: "8s", $delay: "2s" },
+  { $left: "42%", $top: "65%", $size: "3px", $duration: "11s", $delay: "0.5s" },
+  { $left: "55%", $top: "72%", $size: "4px", $duration: "7s", $delay: "3s" },
+  { $left: "63%", $top: "68%", $size: "3px", $duration: "10s", $delay: "1.5s" },
+  { $left: "75%", $top: "74%", $size: "5px", $duration: "8s", $delay: "4s" },
+  { $left: "85%", $top: "62%", $size: "3px", $duration: "9s", $delay: "2s" },
+  { $left: "15%", $top: "55%", $size: "3px", $duration: "12s", $delay: "5s" },
+  { $left: "90%", $top: "70%", $size: "4px", $duration: "6s", $delay: "0s" },
+];
 
-const IDLE_DIALOG    = 'Welcome to NIX. A quiet place to explore the works of a web developer. Talk to the bartender.'
-const HOVER_DIALOGS  = [
+const IDLE_DIALOG =
+  "Welcome to NIX. A quiet place to explore the works of a web developer. Talk to the bartender.";
+const HOVER_DIALOGS = [
   '"Need something? I\'ve got a few projects lined up."',
-  'He slides a card across the counter without a word.',
+  "He slides a card across the counter without a word.",
   '"Take a look. Been working on some things."',
-]
+];
 
 export default function Home() {
-  const router                    = useRouter()
-  const [playing, setPlaying]     = useState(false)
-  const [dialogText, setDialog]   = useState(IDLE_DIALOG)
-  const audioRef                  = useRef(null)
+  const router = useRouter();
+  const [dialogText, setDialog] = useState(IDLE_DIALOG);
 
-  // initialise audio once
-  useEffect(() => {
-    audioRef.current = new Audio('/audio/lounge.mp3')
-    audioRef.current.loop   = true
-    audioRef.current.volume = 0.35
-    return () => audioRef.current?.pause()
-  }, [])
-
-  function toggleMusic() {
-    if (!audioRef.current) return
-    if (playing) {
-      audioRef.current.pause()
-    } else {
-      audioRef.current.play().catch(() => {})   // browser may block until interaction
-    }
-    setPlaying(p => !p)
-  }
+  const { playing, toggleMusic } = useMusic();
 
   function onBartenderEnter() {
-    const line = HOVER_DIALOGS[Math.floor(Math.random() * HOVER_DIALOGS.length)]
-    setDialog(line)
+    const line =
+      HOVER_DIALOGS[Math.floor(Math.random() * HOVER_DIALOGS.length)];
+    setDialog(line);
   }
 
   function onBartenderLeave() {
-    setDialog(IDLE_DIALOG)
+    setDialog(IDLE_DIALOG);
   }
 
   function goProjects() {
-    router.push('/projects')
+    router.push("/projects");
   }
 
   return (
@@ -76,11 +72,19 @@ export default function Home() {
         </div>
         <div className="nav-links">
           <span className="nav-link active">Projects</span>
-          <span className="nav-link" onClick={() => router.push('/skills')}>Skills</span>
-          <span className="nav-link" onClick={() => router.push('/contact')}>Contact</span>
+          <span className="nav-link" onClick={() => router.push("/skills")}>
+            Skills
+          </span>
+          <span className="nav-link" onClick={() => router.push("/contact")}>
+            Contact
+          </span>
         </div>
         <div className="nav-icons">
-          <div className="nav-icon" title="About me" onClick={() => router.push('/about')}>
+          <div
+            className="nav-icon"
+            title="About me"
+            onClick={() => router.push("/about")}
+          >
             ○
           </div>
           <div className="nav-icon" title="Resume">
@@ -90,8 +94,12 @@ export default function Home() {
       </Navbar>
 
       {/* ── Music ── */}
-      <MusicBtn $playing={playing} onClick={toggleMusic} aria-label="toggle music">
-        <span className="note">{playing ? '♫' : '♪'}</span>
+      <MusicBtn
+        $playing={playing}
+        onClick={toggleMusic}
+        aria-label="toggle music"
+      >
+        <span className="note">{playing ? "♫" : "♪"}</span>
       </MusicBtn>
 
       {/* ── Bartender ── */}
@@ -101,8 +109,16 @@ export default function Home() {
         onClick={goProjects}
       >
         <span className="tip">view projects</span>
-        <img className="idle" src="/images/bartender-idle.png" alt="bartender" />
-        <img className="glass" src="/images/bartender-glass.png" alt="bartender holding glass" />
+        <img
+          className="idle"
+          src="/images/bartender-idle.png"
+          alt="bartender"
+        />
+        <img
+          className="glass"
+          src="/images/bartender-glass.png"
+          alt="bartender holding glass"
+        />
         <div className="glow" />
       </BartenderWrap>
 
@@ -118,5 +134,5 @@ export default function Home() {
         <div className="hint">CLICK TO INTERACT ˅</div>
       </DialogBox>
     </Scene>
-  )
+  );
 }

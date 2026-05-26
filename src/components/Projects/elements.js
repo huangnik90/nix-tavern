@@ -1,21 +1,29 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from "styled-components";
 
-const fadeUp = keyframes`
-  from { opacity: 0; transform: translateY(16px); }
+// ─── Animations ───────────────────────────────────────────────────────────────
+
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
-`
+`;
 
-const slideIn = keyframes`
-  from { opacity: 0; transform: translateX(-12px); }
-  to   { opacity: 1; transform: translateX(0); }
-`
+const posterReveal = keyframes`
+  from { opacity: 0; transform: scale(0.96) rotate(-1deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0deg); }
+`;
 
-const cardSlide = keyframes`
-  from { opacity: 0; transform: translateX(40px) rotate(2deg); }
-  to   { opacity: 1; transform: translateX(0) rotate(0deg); }
-`
+const stampDrop = keyframes`
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(2) rotate(-15deg); }
+  60%  { opacity: 1; transform: translate(-50%, -50%) scale(0.95) rotate(-15deg); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-15deg); }
+`;
 
-// ─── Full scene wrapper ────────────────────────────────────────────────────────
+const tagHover = keyframes`
+  from { transform: translateY(0); }
+  to   { transform: translateY(-2px); }
+`;
+
+// ─── Scene ────────────────────────────────────────────────────────────────────
 
 export const Scene = styled.div`
   position: relative;
@@ -23,7 +31,9 @@ export const Scene = styled.div`
   height: 100vh;
   overflow: hidden;
   font-family: var(--font-body);
-`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const BgImage = styled.img`
   position: absolute;
@@ -31,279 +41,497 @@ export const BgImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
-  pointer-events: none;
+  object-position: center;
   user-select: none;
-`
+  pointer-events: none;
+`;
 
 export const Overlay = styled.div`
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
   pointer-events: none;
-`
+`;
 
 // ─── Navbar ───────────────────────────────────────────────────────────────────
 
 export const Navbar = styled.nav`
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 56px;
+  position: relative;
+  z-index: 10;
+  height: 52px;
   display: flex;
   align-items: center;
-  padding: 0 32px;
-  z-index: 10;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, transparent 100%);
+  padding: 0 28px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.75) 0%,
+    transparent 100%
+  );
+  flex-shrink: 0;
 
   .back {
     font-family: var(--font-mono);
     font-size: 10px;
-    color: rgba(200,155,55,0.55);
+    font-weight: 600;
+    color: rgba(245, 166, 35, 0.55);
     letter-spacing: 2px;
     cursor: pointer;
     transition: color 0.2s;
-    &:hover { color: var(--amber); }
+    text-transform: uppercase;
+
+    &:hover {
+      color: var(--primary);
+    }
   }
 
   .title {
     flex: 1;
     text-align: center;
     font-family: var(--font-display);
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--amber);
-    letter-spacing: 6px;
-    text-transform: uppercase;
-  }
-
-  .spacer { width: 80px; }
-`
-
-// ─── Bartender strip at top ───────────────────────────────────────────────────
-
-export const BartenderStrip = styled.div`
-  position: absolute;
-  top: 56px;
-  left: 0; right: 0;
-  height: 200px;
-  z-index: 5;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  pointer-events: none;
-
-  .bt-img {
-    height: 210px;
-    object-fit: contain;
-    object-position: bottom center;
-    user-select: none;
-    animation: ${fadeUp} 0.5s ease both;
-  }
-
-  .counter-top {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 14px;
-    background: #3a1a06;
-    border-top: 2px solid #7a3c10;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
-  }
-
-  .counter-face {
-    position: absolute;
-    bottom: -40px; left: 0; right: 0;
-    height: 40px;
-    background: #1e0d04;
-    z-index: 6;
-  }
-
-  .bt-quote {
-    position: absolute;
-    bottom: 18px;
-    right: 80px;
-    font-family: var(--font-body);
-    font-style: italic;
-    font-size: 12px;
-    color: rgba(200,155,55,0.5);
-    letter-spacing: 0.3px;
-    pointer-events: none;
-    animation: ${fadeUp} 0.6s 0.3s ease both;
-    opacity: 0;
-    animation-fill-mode: forwards;
-  }
-`
-
-// ─── Cards area ───────────────────────────────────────────────────────────────
-
-export const CardsArea = styled.div`
-  position: absolute;
-  top: 270px;
-  left: 0; right: 0; bottom: 0;
-  overflow-y: auto;
-  padding: 8px 32px 32px;
-  z-index: 7;
-
-  /* hide scrollbar but keep scroll */
-  scrollbar-width: none;
-  &::-webkit-scrollbar { display: none; }
-`
-
-export const SectionHeader = styled.div`
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-bottom: 14px;
-  animation: ${slideIn} 0.4s ease both;
-
-  .label {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    color: rgba(220,165,45,0.42);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-  }
-
-  .heading {
-    font-family: var(--font-display);
     font-size: 16px;
-    font-weight: 700;
-    color: var(--amber);
-    letter-spacing: 3px;
+    font-weight: 900;
+    color: var(--primary);
+    letter-spacing: 8px;
+    text-transform: uppercase;
   }
 
-  .line {
-    flex: 1;
-    height: 1px;
-    background: rgba(180,120,40,0.2);
+  .spacer {
+    width: 80px;
   }
-`
+`;
 
-export const ProjectCard = styled.div`
-  background: rgba(8, 5, 2, 0.88);
-  border: 1px solid rgba(100, 60, 20, 0.35);
-  border-radius: 6px;
-  margin-bottom: 10px;
+// ─── Main layout ──────────────────────────────────────────────────────────────
+
+export const Main = styled.div`
+  position: relative;
+  z-index: 5;
+  flex: 1;
+  display: flex;
   overflow: hidden;
-  cursor: pointer;
-  transition: border-color 0.2s, transform 0.2s;
-  animation: ${cardSlide} 0.45s ${({ $index }) => $index * 0.08}s ease both;
-  opacity: 0;
-  animation-fill-mode: forwards;
+`;
 
-  &:hover {
-    border-color: rgba(200, 140, 50, 0.5);
-    transform: translateY(-2px);
-  }
+// ─── Sidebar ──────────────────────────────────────────────────────────────────
 
-  &.active {
-    border-color: rgba(200, 140, 50, 0.65);
-  }
+export const Sidebar = styled.aside`
+  flex-shrink: 0;
+  width: ${({ $collapsed }) => ($collapsed ? "52px" : "220px")};
+  transition: width 0.3s ease;
+  background: rgba(8, 5, 2, 0.82);
+  border-right: 1px solid rgba(245, 166, 35, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 
-  .card-header {
+  .sidebar-header {
+    padding: 16px 14px 10px;
     display: flex;
     align-items: center;
-    padding: 12px 16px 10px;
-    gap: 12px;
-  }
-
-  .num {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: rgba(100,60,20,0.35);
-    border: 1px solid rgba(180,120,40,0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 700;
-    color: rgba(200,150,60,0.75);
-    font-family: var(--font-mono);
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(245, 166, 35, 0.1);
     flex-shrink: 0;
   }
 
-  .info { flex: 1; }
+  .sidebar-label {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    color: rgba(245, 166, 35, 0.4);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    opacity: ${({ $collapsed }) => ($collapsed ? "0" : "1")};
+    transition: opacity 0.2s;
+  }
 
-  .proj-title {
+  .toggle-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    border: 1px solid rgba(245, 166, 35, 0.2);
+    background: transparent;
+    color: rgba(245, 166, 35, 0.5);
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    margin-left: auto;
+
+    &:hover {
+      border-color: rgba(245, 166, 35, 0.5);
+      color: var(--primary);
+    }
+  }
+
+  .project-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+`;
+
+export const SidebarItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+  position: relative;
+  border-left: 2px solid transparent;
+
+  ${({ $active }) =>
+    $active &&
+    css`
+      background: rgba(245, 166, 35, 0.08);
+      border-left-color: var(--primary);
+    `}
+
+  &:hover {
+    background: rgba(245, 166, 35, 0.06);
+  }
+
+  .item-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    background: ${({ $active }) =>
+      $active ? "rgba(245, 166, 35, 0.2)" : "rgba(245, 166, 35, 0.07)"};
+    border: 1px solid
+      ${({ $active }) =>
+        $active ? "rgba(245, 166, 35, 0.4)" : "rgba(245, 166, 35, 0.15)"};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    color: ${({ $active }) =>
+      $active ? "var(--primary)" : "rgba(245, 166, 35, 0.5)"};
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+
+  .item-name {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: ${({ $active }) =>
+      $active ? "var(--primary)" : "rgba(215, 204, 200, 0.6)"};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.15s;
+    flex: 1;
+  }
+
+  .lock-icon {
+    font-size: 9px;
+    color: rgba(245, 166, 35, 0.3);
+    flex-shrink: 0;
+  }
+
+  /* tooltip on collapsed */
+  .tooltip {
+    position: absolute;
+    left: 58px;
+    background: rgba(8, 5, 2, 0.95);
+    border: 1px solid rgba(245, 166, 35, 0.3);
+    color: var(--primary);
+    font-size: 10px;
+    font-family: var(--font-mono);
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 20;
+  }
+
+  &:hover .tooltip {
+    opacity: 1;
+  }
+`;
+
+// ─── Content area ─────────────────────────────────────────────────────────────
+
+export const Content = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 40px;
+  gap: 48px;
+  overflow: hidden;
+`;
+
+// ─── WANTED Poster ────────────────────────────────────────────────────────────
+
+export const WantedPoster = styled.div`
+  flex-shrink: 0;
+  width: 460px;
+  background: #c8a96e;
+  border: 3px solid #2a1a08;
+  box-shadow:
+    4px 4px 0 #1a0e04,
+    0 8px 40px rgba(0, 0, 0, 0.7),
+    inset 0 0 40px rgba(0, 0, 0, 0.15);
+  position: relative;
+  animation: ${posterReveal} 0.5s ease both;
+
+  /* aged paper texture overlay */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.015) 2px,
+      rgba(0, 0, 0, 0.015) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .poster-header {
+    background: #2a1a08;
+    padding: 8px 12px 6px;
+    text-align: center;
+  }
+
+  .wanted-text {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 900;
+    color: #c8a96e;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .poster-divider {
+    height: 2px;
+    background: linear-gradient(to right, transparent, #c8a96e, transparent);
+    margin: 0 16px;
+  }
+
+  .poster-img-wrap {
+    position: relative;
+    height: 420px;
+    overflow: hidden;
+    background: #1a0e04;
+    margin: 10px;
+    border: 2px solid #2a1a08;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      filter: sepia(20%) contrast(1.05);
+    }
+  }
+
+  .poster-footer {
+    padding: 8px 12px 12px;
+    text-align: center;
+  }
+
+  .poster-name {
     font-family: var(--font-display);
     font-size: 13px;
     font-weight: 700;
-    color: rgba(230,190,90,0.92);
+    color: #2a1a08;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .poster-reward {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: rgba(42, 26, 8, 0.6);
     letter-spacing: 1px;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+`;
+
+export const ClassifiedStamp = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  border: 3px solid rgba(180, 30, 30, 0.85);
+  color: rgba(180, 30, 30, 0.85);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  padding: 6px 14px;
+  white-space: nowrap;
+  z-index: 2;
+  pointer-events: none;
+  animation: ${stampDrop} 0.4s 0.3s ease both;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  text-shadow: 0 0 8px rgba(180, 30, 30, 0.4);
+`;
+
+// ─── Project Detail ───────────────────────────────────────────────────────────
+
+export const Detail = styled.div`
+  flex: 1;
+  max-width: 480px;
+  animation: ${fadeIn} 0.4s ease both;
+
+  .detail-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: rgba(245, 166, 35, 0.4);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
   }
 
-  .proj-desc {
+  .detail-title {
+    font-family: var(--font-display);
+    font-size: 36px; /* naik dari 26px */
+    font-weight: 900;
+    color: var(--primary);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    text-shadow: 0 0 40px rgba(245, 166, 35, 0.2); /* subtle glow */
+  }
+
+  .detail-industry {
+    font-family: var(--font-mono);
     font-size: 11px;
-    color: rgba(160,120,60,0.6);
-    margin-top: 2px;
-    font-family: var(--font-mono);
+    color: rgba(215, 204, 200, 0.45);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
   }
 
-  .tags {
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, rgba(245, 166, 35, 0.4), transparent);
+    margin-bottom: 20px;
+  }
+
+  .detail-desc {
+    font-family: var(--font-body);
+    font-size: 17px; /* naik dari 14px */
+    font-style: italic;
+    color: rgba(215, 204, 200, 0.82);
+    line-height: 1.9;
+    margin-bottom: 24px;
+  }
+
+  .tech-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: rgba(245, 166, 35, 0.4);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .tech-list {
     display: flex;
-    gap: 5px;
     flex-wrap: wrap;
-    justify-content: flex-end;
-    max-width: 200px;
-  }
-
-  .tag {
-    font-size: 8px;
-    padding: 2px 7px;
-    border-radius: 8px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    font-family: var(--font-mono);
-
-    &.green  { background: rgba(20,60,20,0.8);  color: #70c870; border: 1px solid rgba(40,100,40,0.4); }
-    &.blue   { background: rgba(10,30,60,0.8);  color: #70a8d8; border: 1px solid rgba(20,60,100,0.4); }
-    &.amber  { background: rgba(60,40,5,0.8);   color: #d4a030; border: 1px solid rgba(100,70,10,0.4); }
-  }
-
-  /* expandable body */
-  .card-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.32s ease;
-
-    &.open { max-height: 160px; }
-  }
-
-  .card-inner {
-    padding: 0 16px 14px;
-    border-top: 1px solid rgba(100,60,20,0.2);
-    padding-top: 12px;
-
-    p {
-      font-size: 12px;
-      color: rgba(170,130,70,0.72);
-      line-height: 1.7;
-      margin-bottom: 10px;
-      font-family: var(--font-body);
-      font-style: italic;
-    }
+    gap: 7px;
+    margin-bottom: 24px;
   }
 
   .links {
     display: flex;
-    gap: 8px;
-
-    .link-btn {
-      font-size: 9px;
-      padding: 4px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(180,120,40,0.3);
-      color: rgba(200,150,60,0.7);
-      cursor: pointer;
-      letter-spacing: 0.5px;
-      transition: all 0.15s;
-      font-family: var(--font-mono);
-
-      &:hover {
-        background: rgba(100,60,20,0.3);
-        color: rgba(230,180,80,0.9);
-        border-color: rgba(200,140,50,0.5);
-      }
-    }
+    gap: 10px;
+    flex-wrap: wrap;
   }
-`
+`;
+
+export const TechTag = styled.span`
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+  cursor: default;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+
+  background: rgba(245, 166, 35, 0.1);
+  color: rgba(245, 166, 35, 0.8);
+  border: 1px solid rgba(245, 166, 35, 0.25);
+
+  &:hover {
+    animation: ${tagHover} 0.15s ease forwards;
+    box-shadow: 0 4px 12px rgba(245, 166, 35, 0.15);
+    background: rgba(245, 166, 35, 0.18);
+    color: var(--primary);
+    border-color: rgba(245, 166, 35, 0.45);
+  }
+`;
+
+export const LinkBtn = styled.a`
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+
+  ${({ $primary }) =>
+    $primary
+      ? css`
+          background: var(--primary);
+          color: var(--tertiary);
+          border: 1px solid var(--primary);
+          &:hover {
+            background: transparent;
+            color: var(--primary);
+          }
+        `
+      : css`
+          background: transparent;
+          color: rgba(245, 166, 35, 0.65);
+          border: 1px solid rgba(245, 166, 35, 0.25);
+          &:hover {
+            border-color: rgba(245, 166, 35, 0.55);
+            color: var(--primary);
+          }
+        `}
+`;
+
+export const NdaBadge = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 3px;
+  color: rgba(180, 30, 30, 0.8);
+  border: 1px solid rgba(180, 30, 30, 0.3);
+  background: rgba(180, 30, 30, 0.08);
+`;

@@ -1,7 +1,10 @@
 import styled, { keyframes, css } from "styled-components";
 
 // ─── Animations ───────────────────────────────────────────────────────────────
-
+const breathe = keyframes`
+  0%, 100% { transform: translateX(-50%) translateY(0px); }
+  50%       { transform: translateX(-50%) translateY(-6px); }
+`;
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -53,18 +56,19 @@ export const Overlay = styled.div`
 `;
 
 // ─── Dust Particles ───────────────────────────────────────────────────────────
-
 export const DustParticle = styled.span`
   position: absolute;
   border-radius: 50%;
-  background: rgba(220, 180, 80, 0.07);
+  background: rgba(245, 166, 35, 0.2);
+  box-shadow: 0 0 6px rgba(245, 166, 35, 0.25);
   pointer-events: none;
-  animation: ${floatDust} ${({ duration }) => duration || "9s"} linear infinite;
-  animation-delay: ${({ delay }) => delay || "0s"};
-  width: ${({ size }) => size || "3px"};
-  height: ${({ size }) => size || "3px"};
-  left: ${({ left }) => left};
-  top: ${({ top }) => top};
+  animation: ${floatDust} ${({ $duration }) => $duration || "9s"} linear
+    infinite;
+  animation-delay: ${({ $delay }) => $delay || "0s"};
+  width: ${({ $size }) => $size || "3px"};
+  height: ${({ $size }) => $size || "3px"};
+  left: ${({ $left }) => $left};
+  top: ${({ $top }) => $top};
 `;
 
 // ─── Navbar ───────────────────────────────────────────────────────────────────
@@ -167,40 +171,68 @@ export const Navbar = styled.nav`
 `;
 
 // ─── Music Toggle ─────────────────────────────────────────────────────────────
-
+const pulseRing = keyframes`
+  0%   { transform: scale(1);   opacity: 0.6; }
+  70%  { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1);   opacity: 0; }
+`;
+const noteBounce = keyframes`
+  from { transform: scale(1) rotate(-5deg); }
+  to   { transform: scale(1.2) rotate(5deg); }
+`;
 export const MusicBtn = styled.button`
   position: absolute;
   top: 68px;
   right: 20px;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: rgba(15, 9, 3, 0.65);
-  border: 1px solid rgba(180, 110, 30, 0.28);
+  border: 1px solid rgba(245, 166, 35, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
-  transition: border-color 0.2s;
+  transition: all 0.2s;
+  cursor: pointer;
+
+  /* pulse ring saat belum playing */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid rgba(245, 166, 35, 0.4);
+    animation: ${pulseRing} 2s ease-out infinite;
+    pointer-events: none;
+  }
 
   &:hover {
-    border-color: rgba(220, 160, 50, 0.5);
+    border-color: var(--primary);
+    background: rgba(245, 166, 35, 0.15);
+    transform: scale(1.1);
   }
 
   .note {
-    font-size: 13px;
-    color: rgba(200, 150, 50, 0.6);
-    transition: color 0.2s;
+    font-size: 15px;
+    color: rgba(245, 166, 35, 0.8);
     user-select: none;
+    transition: color 0.2s;
   }
 
   ${({ $playing }) =>
     $playing &&
     css`
-      border-color: rgba(232, 184, 74, 0.5);
+      border-color: var(--primary);
+      background: rgba(245, 166, 35, 0.12);
+
+      &::before {
+        animation: none; /* stop pulse saat playing */
+      }
+
       .note {
-        color: var(--amber);
-        animation: ${noteBouce} 0.7s infinite alternate;
+        color: var(--primary);
+        animation: ${noteBounce} 0.7s infinite alternate;
       }
     `}
 `;
@@ -208,6 +240,7 @@ export const MusicBtn = styled.button`
 // ─── Bartender ────────────────────────────────────────────────────────────────
 
 export const BartenderWrap = styled.div`
+  animation: ${breathe} 3.5s ease-in-out infinite;
   position: absolute;
   /* sits behind the counter — bottom aligns with counter top */
   bottom: 80px;
