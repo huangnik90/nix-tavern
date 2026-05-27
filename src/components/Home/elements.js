@@ -196,6 +196,18 @@ export const MusicBtn = styled.button`
   transition: all 0.2s;
   cursor: pointer;
 
+  .glass {
+    opacity: 0;
+    transition: opacity 0.22s ease;
+    transform-style: preserve-3d;
+    will-change: opacity;
+  }
+  .idle,
+  .glass {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
   /* pulse ring saat belum playing */
   &::before {
     content: "";

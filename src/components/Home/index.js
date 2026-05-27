@@ -52,7 +52,10 @@ export default function Home() {
   function goProjects() {
     router.push("/projects");
   }
-
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/images/bartender-nix-2.png";
+  }, []);
   return (
     <Scene>
       {/* ── Background ── */}
@@ -71,7 +74,9 @@ export default function Home() {
           <span className="brand-sub">portfolio &amp; works</span>
         </div>
         <div className="nav-links">
-          <span className="nav-link active">Projects</span>
+          <span className="nav-link active" onClick={goProjects}>
+            Projects
+          </span>
           <span className="nav-link" onClick={() => router.push("/skills")}>
             Skills
           </span>
@@ -111,12 +116,12 @@ export default function Home() {
         <span className="tip">view projects</span>
         <img
           className="idle"
-          src="/images/bartender-nix-2.png"
+          src="/images/bartender-nix-1.png"
           alt="bartender"
         />
         <img
           className="glass"
-          src="/images/bartender-nix-1.png"
+          src="/images/bartender-nix-2.png"
           alt="bartender holding glass-2"
         />
         <div className="glow" />
