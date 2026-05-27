@@ -126,7 +126,7 @@ export const Sidebar = styled.aside`
   flex-shrink: 0;
   width: ${({ $collapsed }) => ($collapsed ? "3.25rem" : "13.75rem")};
   transition: width 0.3s ease;
-  background: rgba(8, 5, 2, 0.88);
+  background: rgba(8, 5, 2, 0.75);
   border-right: 1px solid rgba(245, 166, 35, 0.12);
   display: flex;
   flex-direction: column;
@@ -237,14 +237,20 @@ export const SidebarItem = styled.div`
       $active ? "var(--primary)" : "var(--primary-dim)"};
     flex-shrink: 0;
     transition: all 0.15s;
+    color: ${({ $active }) =>
+      $active
+        ? "var(--primary)"
+        : "rgba(245, 166, 35, 0.65)"}; /* naik dari 0.5 */
   }
 
   .item-name {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-size: 0.75rem; /* naik dari 0.6875rem */
     font-weight: 600;
     color: ${({ $active }) =>
-      $active ? "var(--primary)" : "var(--neutral-dim)"};
+      $active
+        ? "var(--primary)"
+        : "rgba(215, 204, 200, 0.85)"}; /* naik dari 0.6 ke 0.85 */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

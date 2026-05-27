@@ -100,6 +100,19 @@ const PROJECTS = [
     github: null,
     nda: true,
   },
+  {
+    id: 7,
+    name: "Asira Ayannah",
+    title: "Fintech Platform",
+    industry: "Financial Technology",
+    description:
+      "B2B2C and B2C fintech platform focused on digital lending, insurance, and investment services. Built to simplify loan applications, repayments, insurance access, and future investment products including stocks, bonds, and mutual funds.",
+    techs: ["Redux", "Rest API", "React", "Responsive Design"],
+    screenshot: "/images/asira.webp",
+    live: "https://www.ayannah.com/products",
+    github: null,
+    nda: false,
+  },
 ];
 
 export default function Projects() {
