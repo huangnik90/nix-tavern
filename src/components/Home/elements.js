@@ -196,18 +196,6 @@ export const MusicBtn = styled.button`
   transition: all 0.2s;
   cursor: pointer;
 
-  .glass {
-    opacity: 0;
-    transition: opacity 0.22s ease;
-    transform-style: preserve-3d;
-    will-change: opacity;
-  }
-  .idle,
-  .glass {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-
   /* pulse ring saat belum playing */
   &::before {
     content: "";
@@ -258,8 +246,8 @@ export const BartenderWrap = styled.div`
   bottom: 180px;
   left: 50%;
   transform: translateX(-50%);
-  width: 620px;
-  height: 660px;
+  width: 420px;
+  height: 460px;
   cursor: pointer;
   z-index: 5;
 
