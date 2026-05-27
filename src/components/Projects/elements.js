@@ -3,7 +3,7 @@ import styled, { keyframes, css } from "styled-components";
 // ─── Animations ───────────────────────────────────────────────────────────────
 
 const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(0.75rem); }
   to   { opacity: 1; transform: translateY(0); }
 `;
 
@@ -20,7 +20,7 @@ const stampDrop = keyframes`
 
 const tagHover = keyframes`
   from { transform: translateY(0); }
-  to   { transform: translateY(-2px); }
+  to   { transform: translateY(-0.125rem); }
 `;
 
 // ─── Scene ────────────────────────────────────────────────────────────────────
@@ -58,10 +58,10 @@ export const Overlay = styled.div`
 export const Navbar = styled.nav`
   position: relative;
   z-index: 10;
-  height: 52px;
+  height: 3.25rem;
   display: flex;
   align-items: center;
-  padding: 0 28px;
+  padding: 0 1.75rem;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.75) 0%,
@@ -71,13 +71,14 @@ export const Navbar = styled.nav`
 
   .back {
     font-family: var(--font-mono);
-    font-size: 10px;
+    font-size: 0.625rem;
     font-weight: 600;
     color: var(--primary-dim);
-    letter-spacing: 2px;
+    letter-spacing: 0.125rem;
     cursor: pointer;
     transition: color 0.2s;
     text-transform: uppercase;
+    white-space: nowrap;
 
     &:hover {
       color: var(--primary);
@@ -88,15 +89,19 @@ export const Navbar = styled.nav`
     flex: 1;
     text-align: center;
     font-family: var(--font-display);
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 900;
     color: var(--primary);
-    letter-spacing: 8px;
+    letter-spacing: 0.5rem;
     text-transform: uppercase;
   }
 
   .spacer {
-    width: 80px;
+    width: 5rem;
+
+    @media (max-width: 48rem) {
+      width: 2rem;
+    }
   }
 `;
 
@@ -114,16 +119,20 @@ export const Main = styled.div`
 
 export const Sidebar = styled.aside`
   flex-shrink: 0;
-  width: ${({ $collapsed }) => ($collapsed ? "52px" : "220px")};
+  width: ${({ $collapsed }) => ($collapsed ? "3.25rem" : "13.75rem")};
   transition: width 0.3s ease;
-  background: rgba(8, 5, 2, 0.82);
+  background: rgba(8, 5, 2, 0.88);
   border-right: 1px solid rgba(245, 166, 35, 0.12);
   display: flex;
   flex-direction: column;
   overflow: hidden;
 
+  @media (max-width: 48rem) {
+    width: ${({ $collapsed }) => ($collapsed ? "3.25rem" : "10rem")};
+  }
+
   .sidebar-header {
-    padding: 16px 14px 10px;
+    padding: 1rem 0.875rem 0.625rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -133,9 +142,9 @@ export const Sidebar = styled.aside`
 
   .sidebar-label {
     font-family: var(--font-mono);
-    font-size: 8px;
+    font-size: 0.5rem;
     color: var(--primary-dim);
-    letter-spacing: 3px;
+    letter-spacing: 0.1875rem;
     text-transform: uppercase;
     white-space: nowrap;
     overflow: hidden;
@@ -144,13 +153,13 @@ export const Sidebar = styled.aside`
   }
 
   .toggle-btn {
-    width: 22px;
-    height: 22px;
-    border-radius: 4px;
+    width: 1.375rem;
+    height: 1.375rem;
+    border-radius: 0.25rem;
     border: 1px solid rgba(245, 166, 35, 0.2);
     background: transparent;
     color: var(--primary-dim);
-    font-size: 10px;
+    font-size: 0.625rem;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -168,7 +177,7 @@ export const Sidebar = styled.aside`
   .project-list {
     flex: 1;
     overflow-y: auto;
-    padding: 8px 0;
+    padding: 0.5rem 0;
     scrollbar-width: none;
     &::-webkit-scrollbar {
       display: none;
@@ -179,12 +188,12 @@ export const Sidebar = styled.aside`
 export const SidebarItem = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
+  gap: 0.625rem;
+  padding: 0.625rem 0.875rem;
   cursor: pointer;
   transition: background 0.15s;
   position: relative;
-  border-left: 2px solid transparent;
+  border-left: 0.125rem solid transparent;
 
   ${({ $active }) =>
     $active &&
@@ -198,9 +207,9 @@ export const SidebarItem = styled.div`
   }
 
   .item-icon {
-    width: 26px;
-    height: 26px;
-    border-radius: 4px;
+    width: 1.625rem;
+    height: 1.625rem;
+    border-radius: 0.25rem;
     background: ${({ $active }) =>
       $active ? "rgba(245, 166, 35, 0.2)" : "rgba(245, 166, 35, 0.07)"};
     border: 1px solid
@@ -210,7 +219,7 @@ export const SidebarItem = styled.div`
     align-items: center;
     justify-content: center;
     font-family: var(--font-display);
-    font-size: 10px;
+    font-size: 0.625rem;
     font-weight: 700;
     color: ${({ $active }) =>
       $active ? "var(--primary)" : "var(--primary-dim)"};
@@ -220,7 +229,7 @@ export const SidebarItem = styled.div`
 
   .item-name {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 0.6875rem;
     font-weight: 600;
     color: ${({ $active }) =>
       $active ? "var(--primary)" : "var(--neutral-dim)"};
@@ -232,21 +241,21 @@ export const SidebarItem = styled.div`
   }
 
   .lock-icon {
-    font-size: 9px;
+    font-size: 0.5625rem;
     color: var(--primary-dim);
     flex-shrink: 0;
   }
 
   .tooltip {
     position: absolute;
-    left: 58px;
+    left: 3.625rem;
     background: rgba(8, 5, 2, 0.95);
     border: 1px solid var(--dialog-border);
     color: var(--primary);
-    font-size: 10px;
+    font-size: 0.625rem;
     font-family: var(--font-mono);
-    padding: 4px 10px;
-    border-radius: 4px;
+    padding: 0.25rem 0.625rem;
+    border-radius: 0.25rem;
     white-space: nowrap;
     pointer-events: none;
     opacity: 0;
@@ -266,24 +275,31 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 16px 60px 24px;
-  gap: 20px;
-  overflow: hidden;
+  justify-content: flex-start;
+  padding: 1rem 2.5rem 1.5rem;
+  gap: 1rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: 48rem) {
+    padding: 0.75rem 1rem 1.5rem;
+    gap: 0.75rem;
+  }
 `;
 
 // ─── WANTED Poster ────────────────────────────────────────────────────────────
-/* poster-specific colors (#c8a96e, #2a1a08) are intentionally hardcoded
-   — they represent aged paper/ink and are not part of the UI color system */
 
 export const WantedPoster = styled.div`
-  width: 800px;
+  width: clamp(18rem, 70vw, 50rem);
   background: #c8a96e;
-  border: 3px solid #2a1a08;
+  border: 0.1875rem solid #2a1a08;
   box-shadow:
-    4px 4px 0 #1a0e04,
-    0 8px 40px rgba(0, 0, 0, 0.7),
-    inset 0 0 40px rgba(0, 0, 0, 0.15);
+    0.25rem 0.25rem 0 #1a0e04,
+    0 0.5rem 2.5rem rgba(0, 0, 0, 0.7),
+    inset 0 0 2.5rem rgba(0, 0, 0, 0.15);
   position: relative;
   animation: ${posterReveal} 0.5s ease both;
   flex-shrink: 0;
@@ -305,33 +321,33 @@ export const WantedPoster = styled.div`
 
   .poster-header {
     background: #2a1a08;
-    padding: 8px 12px 6px;
+    padding: 0.5rem 0.75rem 0.375rem;
     text-align: center;
   }
 
   .wanted-text {
     font-family: var(--font-display);
-    font-size: 26px;
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
     font-weight: 900;
     color: #c8a96e;
-    letter-spacing: 6px;
+    letter-spacing: 0.375rem;
     text-transform: uppercase;
     line-height: 1;
   }
 
   .poster-divider {
-    height: 2px;
+    height: 0.125rem;
     background: linear-gradient(to right, transparent, #c8a96e, transparent);
-    margin: 0 16px;
+    margin: 0 1rem;
   }
 
   .poster-img-wrap {
     position: relative;
-    height: 400px;
+    height: clamp(12rem, 38vh, 32rem);
     overflow: hidden;
     background: #1a0e04;
-    margin: 8px;
-    border: 2px solid #2a1a08;
+    margin: 0.5rem;
+    border: 0.125rem solid #2a1a08;
 
     img {
       width: 100%;
@@ -343,26 +359,26 @@ export const WantedPoster = styled.div`
   }
 
   .poster-footer {
-    padding: 6px 12px 10px;
+    padding: 0.375rem 0.75rem 0.625rem;
     text-align: center;
   }
 
   .poster-name {
     font-family: var(--font-display);
-    font-size: 12px;
+    font-size: clamp(0.625rem, 1.5vw, 0.875rem);
     font-weight: 700;
     color: #2a1a08;
-    letter-spacing: 2px;
+    letter-spacing: 0.125rem;
     text-transform: uppercase;
     line-height: 1.3;
   }
 
   .poster-reward {
     font-family: var(--font-mono);
-    font-size: 8px;
+    font-size: clamp(0.5rem, 1vw, 0.5625rem);
     color: rgba(42, 26, 8, 0.6);
-    letter-spacing: 1px;
-    margin-top: 3px;
+    letter-spacing: 0.0625rem;
+    margin-top: 0.1875rem;
     text-transform: uppercase;
   }
 `;
@@ -372,27 +388,27 @@ export const ClassifiedStamp = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-15deg);
-  border: 3px solid rgba(180, 30, 30, 0.85);
+  border: 0.1875rem solid rgba(180, 30, 30, 0.85);
   color: rgba(180, 30, 30, 0.85);
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: clamp(0.875rem, 2.5vw, 1.25rem);
   font-weight: 900;
-  letter-spacing: 4px;
-  padding: 6px 14px;
+  letter-spacing: 0.25rem;
+  padding: 0.375rem 0.875rem;
   white-space: nowrap;
   z-index: 2;
   pointer-events: none;
   animation: ${stampDrop} 0.4s 0.3s ease both;
   opacity: 0;
   animation-fill-mode: forwards;
-  text-shadow: 0 0 8px rgba(180, 30, 30, 0.4);
+  text-shadow: 0 0 0.5rem rgba(180, 30, 30, 0.4);
 `;
 
 // ─── Project Detail ───────────────────────────────────────────────────────────
 
 export const Detail = styled.div`
   width: 100%;
-  max-width: 560px;
+  max-width: clamp(18rem, 70vw, 35rem);
   animation: ${fadeIn} 0.4s ease both;
   display: flex;
   flex-direction: column;
@@ -401,32 +417,32 @@ export const Detail = styled.div`
 
   .detail-tag {
     font-family: var(--font-mono);
-    font-size: 8px;
+    font-size: 0.5rem;
     color: var(--primary-dim);
-    letter-spacing: 3px;
+    letter-spacing: 0.1875rem;
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 0.375rem;
   }
 
   .detail-title {
     font-family: var(--font-display);
-    font-size: 30px;
+    font-size: clamp(1.25rem, 4vw, 1.875rem);
     font-weight: 900;
     color: var(--primary);
-    letter-spacing: 4px;
+    letter-spacing: 0.25rem;
     text-transform: uppercase;
     line-height: 1.1;
-    margin-bottom: 4px;
-    text-shadow: 0 0 40px var(--primary-faint);
+    margin-bottom: 0.25rem;
+    text-shadow: 0 0 2.5rem var(--primary-faint);
   }
 
   .detail-industry {
     font-family: var(--font-mono);
-    font-size: 10px;
+    font-size: clamp(0.5rem, 1.5vw, 0.625rem);
     color: var(--neutral-dim);
-    letter-spacing: 3px;
+    letter-spacing: 0.1875rem;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
   }
 
   .divider {
@@ -438,38 +454,38 @@ export const Detail = styled.div`
       var(--dialog-border),
       transparent
     );
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
   }
 
   .detail-desc {
     font-family: var(--font-body);
-    font-size: 15px;
+    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
     font-style: italic;
     color: var(--neutral-dim);
     line-height: 1.8;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
 
   .tech-label {
     font-family: var(--font-mono);
-    font-size: 8px;
+    font-size: 0.5rem;
     color: var(--primary-dim);
-    letter-spacing: 3px;
+    letter-spacing: 0.1875rem;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
   }
 
   .tech-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 7px;
-    margin-bottom: 18px;
+    gap: 0.4375rem;
+    margin-bottom: 1.125rem;
     justify-content: center;
   }
 
   .links {
     display: flex;
-    gap: 10px;
+    gap: 0.625rem;
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -477,11 +493,11 @@ export const Detail = styled.div`
 
 export const TechTag = styled.span`
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 3px;
-  letter-spacing: 0.5px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.1875rem;
+  letter-spacing: 0.03125rem;
   cursor: default;
   transition:
     transform 0.15s,
@@ -492,7 +508,7 @@ export const TechTag = styled.span`
 
   &:hover {
     animation: ${tagHover} 0.15s ease forwards;
-    box-shadow: 0 4px 12px var(--primary-faint);
+    box-shadow: 0 0.25rem 0.75rem var(--primary-faint);
     background: rgba(245, 166, 35, 0.18);
     color: var(--primary);
     border-color: var(--primary-dim);
@@ -501,12 +517,12 @@ export const TechTag = styled.span`
 
 export const LinkBtn = styled.a`
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.0625rem;
   text-transform: uppercase;
-  padding: 8px 18px;
-  border-radius: 3px;
+  padding: 0.5rem 1.125rem;
+  border-radius: 0.1875rem;
   cursor: pointer;
   transition: all 0.2s;
   text-decoration: none;
@@ -536,14 +552,14 @@ export const LinkBtn = styled.a`
 export const NdaBadge = styled.div`
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.375rem;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 600;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.09375rem;
   text-transform: uppercase;
-  padding: 8px 18px;
-  border-radius: 3px;
+  padding: 0.5rem 1.125rem;
+  border-radius: 0.1875rem;
   color: rgba(180, 30, 30, 0.8);
   border: 1px solid rgba(180, 30, 30, 0.3);
   background: rgba(180, 30, 30, 0.08);
