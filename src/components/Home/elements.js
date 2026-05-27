@@ -243,11 +243,11 @@ export const BartenderWrap = styled.div`
   animation: ${breathe} 3.5s ease-in-out infinite;
   position: absolute;
   /* sits behind the counter — bottom aligns with counter top */
-  bottom: 80px;
+  bottom: 180px;
   left: 50%;
   transform: translateX(-50%);
-  width: 420px;
-  height: 460px;
+  width: 720px;
+  height: 760px;
   cursor: pointer;
   z-index: 5;
 

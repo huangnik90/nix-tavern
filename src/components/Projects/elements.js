@@ -36,7 +36,7 @@ export const Scene = styled.div`
 `;
 
 export const BgImage = styled.img`
-  position: absolute;
+  position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
@@ -44,13 +44,15 @@ export const BgImage = styled.img`
   object-position: center;
   user-select: none;
   pointer-events: none;
+  z-index: 0;
 `;
 
 export const Overlay = styled.div`
-  position: absolute;
+  position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
   pointer-events: none;
+  z-index: 0;
 `;
 
 // ─── Navbar ───────────────────────────────────────────────────────────────────
@@ -79,7 +81,6 @@ export const Navbar = styled.nav`
     transition: color 0.2s;
     text-transform: uppercase;
     white-space: nowrap;
-
     &:hover {
       color: var(--primary);
     }
@@ -98,8 +99,11 @@ export const Navbar = styled.nav`
 
   .spacer {
     width: 5rem;
+  }
 
-    @media (max-width: 48rem) {
+  @media (max-width: 48rem) {
+    padding: 0 1rem;
+    .spacer {
       width: 2rem;
     }
   }
@@ -113,6 +117,7 @@ export const Main = styled.div`
   flex: 1;
   display: flex;
   overflow: hidden;
+  min-height: 0; /* important for flex children to scroll */
 `;
 
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
@@ -126,9 +131,16 @@ export const Sidebar = styled.aside`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  height: 100%;
 
-  @media (max-width: 48rem) {
-    width: ${({ $collapsed }) => ($collapsed ? "3.25rem" : "10rem")};
+  /* tablet */
+  @media (max-width: 64rem) {
+    width: ${({ $collapsed }) => ($collapsed ? "3.25rem" : "11rem")};
+  }
+
+  /* mobile */
+  @media (max-width: 30rem) {
+    width: ${({ $collapsed }) => ($collapsed ? "3.25rem" : "9rem")};
   }
 
   .sidebar-header {
@@ -238,6 +250,10 @@ export const SidebarItem = styled.div`
     text-overflow: ellipsis;
     transition: color 0.15s;
     flex: 1;
+
+    @media (max-width: 30rem) {
+      font-size: 0.5625rem;
+    }
   }
 
   .lock-icon {
@@ -276,24 +292,33 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 1rem 2.5rem 1.5rem;
-  gap: 1rem;
   overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.5rem 2rem 3rem;
+  gap: 1.25rem;
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
   }
 
-  @media (max-width: 48rem) {
-    padding: 0.75rem 1rem 1.5rem;
-    gap: 0.75rem;
+  /* tablet */
+  @media (max-width: 64rem) {
+    padding: 1.25rem 1.5rem 3rem;
+    gap: 1rem;
+  }
+
+  /* mobile */
+  @media (max-width: 30rem) {
+    padding: 1rem 0.75rem 3rem;
+    gap: 0.875rem;
   }
 `;
 
 // ─── WANTED Poster ────────────────────────────────────────────────────────────
 
 export const WantedPoster = styled.div`
-  width: clamp(18rem, 70vw, 50rem);
+  /* fluid width — never wider than available space */
+  width: min(50rem, 92%);
   background: #c8a96e;
   border: 0.1875rem solid #2a1a08;
   box-shadow:
@@ -343,7 +368,8 @@ export const WantedPoster = styled.div`
 
   .poster-img-wrap {
     position: relative;
-    height: clamp(12rem, 38vh, 32rem);
+    /* fluid height based on viewport */
+    height: clamp(10rem, 35vh, 28rem);
     overflow: hidden;
     background: #1a0e04;
     margin: 0.5rem;
@@ -354,7 +380,6 @@ export const WantedPoster = styled.div`
       height: 100%;
       object-fit: cover;
       object-position: top;
-      filter: sepia(20%) contrast(1.05);
     }
   }
 
@@ -407,13 +432,13 @@ export const ClassifiedStamp = styled.div`
 // ─── Project Detail ───────────────────────────────────────────────────────────
 
 export const Detail = styled.div`
-  width: 100%;
-  max-width: clamp(18rem, 70vw, 35rem);
+  width: min(35rem, 92%);
   animation: ${fadeIn} 0.4s ease both;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  padding-bottom: 1rem;
 
   .detail-tag {
     font-family: var(--font-mono);
@@ -426,7 +451,7 @@ export const Detail = styled.div`
 
   .detail-title {
     font-family: var(--font-display);
-    font-size: clamp(1.25rem, 4vw, 1.875rem);
+    font-size: clamp(1.375rem, 4vw, 1.875rem);
     font-weight: 900;
     color: var(--primary);
     letter-spacing: 0.25rem;
@@ -459,7 +484,7 @@ export const Detail = styled.div`
 
   .detail-desc {
     font-family: var(--font-body);
-    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
+    font-size: clamp(0.875rem, 2vw, 1rem);
     font-style: italic;
     color: var(--neutral-dim);
     line-height: 1.8;
@@ -493,7 +518,7 @@ export const Detail = styled.div`
 
 export const TechTag = styled.span`
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: clamp(0.5rem, 1.5vw, 0.625rem);
   font-weight: 600;
   padding: 0.25rem 0.75rem;
   border-radius: 0.1875rem;
@@ -517,7 +542,7 @@ export const TechTag = styled.span`
 
 export const LinkBtn = styled.a`
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: clamp(0.5625rem, 1.5vw, 0.625rem);
   font-weight: 600;
   letter-spacing: 0.0625rem;
   text-transform: uppercase;
@@ -554,7 +579,7 @@ export const NdaBadge = styled.div`
   align-items: center;
   gap: 0.375rem;
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: clamp(0.5625rem, 1.5vw, 0.625rem);
   font-weight: 600;
   letter-spacing: 0.09375rem;
   text-transform: uppercase;

@@ -111,13 +111,13 @@ export default function Home() {
         <span className="tip">view projects</span>
         <img
           className="idle"
-          src="/images/bartender-idle.png"
+          src="/images/bartender-nix-2.png"
           alt="bartender"
         />
         <img
           className="glass"
-          src="/images/bartender-glass.png"
-          alt="bartender holding glass"
+          src="/images/bartender-nix-1.png"
+          alt="bartender holding glass-2"
         />
         <div className="glow" />
       </BartenderWrap>
