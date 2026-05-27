@@ -55,7 +55,8 @@ const PROJECTS = [
     description:
       "Internal logistics dashboard with advanced Mapbox integration for a Japanese company. Real-time fleet tracking and route optimization.",
     techs: ["Next.js", "Mapbox", "React", "Real-time"],
-    screenshot: null,
+    screenshot: "/images/gaudt.png",
+
     live: null,
     github: null,
     nda: true,
@@ -68,7 +69,7 @@ const PROJECTS = [
     description:
       "Internal web application for a major insurance enterprise. Features include agent portal, policy management, and document workflows.",
     techs: ["React", "Redux", "REST API"],
-    screenshot: null,
+    screenshot: "/images/allianz.png",
     live: null,
     github: null,
     nda: true,
@@ -81,7 +82,7 @@ const PROJECTS = [
     description:
       "Digital platform built for a leading FMCG company. Involves internal tooling and distributor management workflows.",
     techs: ["React", "Redux", "REST API"],
-    screenshot: null,
+    screenshot: "/images/bat.png",
     live: null,
     github: null,
     nda: true,
@@ -94,7 +95,7 @@ const PROJECTS = [
     description:
       "Mobile web application for Toyota Dealer Convention in Bali. Handles guest check-in, QR scanning, and real-time attendance tracking for a large-scale corporate event.",
     techs: ["Next.js", "React", "Mobile Web"],
-    screenshot: null,
+    screenshot: "/images/toyota.png",
     live: null,
     github: null,
     nda: true,
@@ -175,7 +176,20 @@ export default function Projects() {
 
             <div className="poster-img-wrap">
               {active.screenshot ? (
-                <img src={active.screenshot} alt={active.title} />
+                <img
+                  src={active.screenshot}
+                  alt={active.title}
+                  style={
+                    active.nda
+                      ? {
+                          filter: "blur(8px) sepia(20%) contrast(1.05)",
+                          transform: "scale(1.1)", // scale up biar blur edge tidak keliatan
+                        }
+                      : {
+                          filter: "sepia(20%) contrast(1.05)",
+                        }
+                  }
+                />
               ) : (
                 <div
                   style={{

@@ -73,7 +73,7 @@ export const Navbar = styled.nav`
     font-family: var(--font-mono);
     font-size: 10px;
     font-weight: 600;
-    color: rgba(245, 166, 35, 0.55);
+    color: var(--primary-dim);
     letter-spacing: 2px;
     cursor: pointer;
     transition: color 0.2s;
@@ -134,7 +134,7 @@ export const Sidebar = styled.aside`
   .sidebar-label {
     font-family: var(--font-mono);
     font-size: 8px;
-    color: rgba(245, 166, 35, 0.4);
+    color: var(--primary-dim);
     letter-spacing: 3px;
     text-transform: uppercase;
     white-space: nowrap;
@@ -149,7 +149,7 @@ export const Sidebar = styled.aside`
     border-radius: 4px;
     border: 1px solid rgba(245, 166, 35, 0.2);
     background: transparent;
-    color: rgba(245, 166, 35, 0.5);
+    color: var(--primary-dim);
     font-size: 10px;
     cursor: pointer;
     display: flex;
@@ -160,7 +160,7 @@ export const Sidebar = styled.aside`
     margin-left: auto;
 
     &:hover {
-      border-color: rgba(245, 166, 35, 0.5);
+      border-color: var(--primary-dim);
       color: var(--primary);
     }
   }
@@ -189,7 +189,7 @@ export const SidebarItem = styled.div`
   ${({ $active }) =>
     $active &&
     css`
-      background: rgba(245, 166, 35, 0.08);
+      background: var(--primary-faint);
       border-left-color: var(--primary);
     `}
 
@@ -213,7 +213,7 @@ export const SidebarItem = styled.div`
     font-size: 10px;
     font-weight: 700;
     color: ${({ $active }) =>
-      $active ? "var(--primary)" : "rgba(245, 166, 35, 0.5)"};
+      $active ? "var(--primary)" : "var(--primary-dim)"};
     flex-shrink: 0;
     transition: all 0.15s;
   }
@@ -223,7 +223,7 @@ export const SidebarItem = styled.div`
     font-size: 11px;
     font-weight: 600;
     color: ${({ $active }) =>
-      $active ? "var(--primary)" : "rgba(215, 204, 200, 0.6)"};
+      $active ? "var(--primary)" : "var(--neutral-dim)"};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -233,16 +233,15 @@ export const SidebarItem = styled.div`
 
   .lock-icon {
     font-size: 9px;
-    color: rgba(245, 166, 35, 0.3);
+    color: var(--primary-dim);
     flex-shrink: 0;
   }
 
-  /* tooltip on collapsed */
   .tooltip {
     position: absolute;
     left: 58px;
     background: rgba(8, 5, 2, 0.95);
-    border: 1px solid rgba(245, 166, 35, 0.3);
+    border: 1px solid var(--dialog-border);
     color: var(--primary);
     font-size: 10px;
     font-family: var(--font-mono);
@@ -265,18 +264,20 @@ export const SidebarItem = styled.div`
 export const Content = styled.div`
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px 40px;
-  gap: 48px;
+  padding: 16px 60px 24px;
+  gap: 20px;
   overflow: hidden;
 `;
 
 // ─── WANTED Poster ────────────────────────────────────────────────────────────
+/* poster-specific colors (#c8a96e, #2a1a08) are intentionally hardcoded
+   — they represent aged paper/ink and are not part of the UI color system */
 
 export const WantedPoster = styled.div`
-  flex-shrink: 0;
-  width: 460px;
+  width: 800px;
   background: #c8a96e;
   border: 3px solid #2a1a08;
   box-shadow:
@@ -285,8 +286,8 @@ export const WantedPoster = styled.div`
     inset 0 0 40px rgba(0, 0, 0, 0.15);
   position: relative;
   animation: ${posterReveal} 0.5s ease both;
+  flex-shrink: 0;
 
-  /* aged paper texture overlay */
   &::before {
     content: "";
     position: absolute;
@@ -310,7 +311,7 @@ export const WantedPoster = styled.div`
 
   .wanted-text {
     font-family: var(--font-display);
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 900;
     color: #c8a96e;
     letter-spacing: 6px;
@@ -326,10 +327,10 @@ export const WantedPoster = styled.div`
 
   .poster-img-wrap {
     position: relative;
-    height: 420px;
+    height: 400px;
     overflow: hidden;
     background: #1a0e04;
-    margin: 10px;
+    margin: 8px;
     border: 2px solid #2a1a08;
 
     img {
@@ -342,13 +343,13 @@ export const WantedPoster = styled.div`
   }
 
   .poster-footer {
-    padding: 8px 12px 12px;
+    padding: 6px 12px 10px;
     text-align: center;
   }
 
   .poster-name {
     font-family: var(--font-display);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     color: #2a1a08;
     letter-spacing: 2px;
@@ -358,10 +359,10 @@ export const WantedPoster = styled.div`
 
   .poster-reward {
     font-family: var(--font-mono);
-    font-size: 9px;
+    font-size: 8px;
     color: rgba(42, 26, 8, 0.6);
     letter-spacing: 1px;
-    margin-top: 4px;
+    margin-top: 3px;
     text-transform: uppercase;
   }
 `;
@@ -390,74 +391,87 @@ export const ClassifiedStamp = styled.div`
 // ─── Project Detail ───────────────────────────────────────────────────────────
 
 export const Detail = styled.div`
-  flex: 1;
-  max-width: 480px;
+  width: 100%;
+  max-width: 560px;
   animation: ${fadeIn} 0.4s ease both;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 
   .detail-tag {
     font-family: var(--font-mono);
-    font-size: 9px;
-    color: rgba(245, 166, 35, 0.4);
+    font-size: 8px;
+    color: var(--primary-dim);
     letter-spacing: 3px;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
 
   .detail-title {
     font-family: var(--font-display);
-    font-size: 36px; /* naik dari 26px */
+    font-size: 30px;
     font-weight: 900;
     color: var(--primary);
     letter-spacing: 4px;
     text-transform: uppercase;
     line-height: 1.1;
-    margin-bottom: 8px;
-    text-shadow: 0 0 40px rgba(245, 166, 35, 0.2); /* subtle glow */
+    margin-bottom: 4px;
+    text-shadow: 0 0 40px var(--primary-faint);
   }
 
   .detail-industry {
     font-family: var(--font-mono);
-    font-size: 11px;
-    color: rgba(215, 204, 200, 0.45);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .divider {
-    height: 1px;
-    background: linear-gradient(to right, rgba(245, 166, 35, 0.4), transparent);
-    margin-bottom: 20px;
-  }
-
-  .detail-desc {
-    font-family: var(--font-body);
-    font-size: 17px; /* naik dari 14px */
-    font-style: italic;
-    color: rgba(215, 204, 200, 0.82);
-    line-height: 1.9;
-    margin-bottom: 24px;
-  }
-
-  .tech-label {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    color: rgba(245, 166, 35, 0.4);
+    font-size: 10px;
+    color: var(--neutral-dim);
     letter-spacing: 3px;
     text-transform: uppercase;
     margin-bottom: 12px;
   }
+
+  .divider {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--dialog-border),
+      transparent
+    );
+    margin-bottom: 12px;
+  }
+
+  .detail-desc {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-style: italic;
+    color: var(--neutral-dim);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .tech-label {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    color: var(--primary-dim);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
   .tech-list {
     display: flex;
     flex-wrap: wrap;
     gap: 7px;
-    margin-bottom: 24px;
+    margin-bottom: 18px;
+    justify-content: center;
   }
 
   .links {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    justify-content: center;
   }
 `;
 
@@ -472,17 +486,16 @@ export const TechTag = styled.span`
   transition:
     transform 0.15s,
     box-shadow 0.15s;
-
-  background: rgba(245, 166, 35, 0.1);
-  color: rgba(245, 166, 35, 0.8);
+  background: var(--primary-faint);
+  color: var(--primary-dim);
   border: 1px solid rgba(245, 166, 35, 0.25);
 
   &:hover {
     animation: ${tagHover} 0.15s ease forwards;
-    box-shadow: 0 4px 12px rgba(245, 166, 35, 0.15);
+    box-shadow: 0 4px 12px var(--primary-faint);
     background: rgba(245, 166, 35, 0.18);
     color: var(--primary);
-    border-color: rgba(245, 166, 35, 0.45);
+    border-color: var(--primary-dim);
   }
 `;
 
@@ -511,10 +524,10 @@ export const LinkBtn = styled.a`
         `
       : css`
           background: transparent;
-          color: rgba(245, 166, 35, 0.65);
-          border: 1px solid rgba(245, 166, 35, 0.25);
+          color: var(--primary-dim);
+          border: 1px solid var(--dialog-border);
           &:hover {
-            border-color: rgba(245, 166, 35, 0.55);
+            border-color: var(--primary-dim);
             color: var(--primary);
           }
         `}
