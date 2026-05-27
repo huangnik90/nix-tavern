@@ -246,8 +246,8 @@ export const BartenderWrap = styled.div`
   bottom: 180px;
   left: 50%;
   transform: translateX(-50%);
-  width: 720px;
-  height: 760px;
+  width: 620px;
+  height: 660px;
   cursor: pointer;
   z-index: 5;
 
