@@ -88,18 +88,23 @@ const CONTRACTS = [
   },
   {
     name: "Toyota Motors",
-    role: "Automotive Industry · Event App",
+    role: "Automotive Industry · Event Management App",
     status: "completed",
     label: "COMPLETED",
   },
   {
     name: "Gaudt Dashboard",
-    role: "Logistics & Mapping · Ongoing",
+    role: "Global Route Mapping Platform · Ongoing",
+    status: "active",
+    label: "ACTIVE",
+  },
+  {
+    name: "Mobadas",
+    role: "Japan Coastal Sea Level Mapping System · Ongoing",
     status: "active",
     label: "ACTIVE",
   },
 ];
-
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function Skills() {
