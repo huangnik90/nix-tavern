@@ -26,11 +26,11 @@ const DUST = [
 ];
 
 const IDLE_DIALOG =
-  "Welcome to NIX. A quiet place to explore the works of a web developer. Talk to the bartender.";
+  "Welcome to NIX. A quiet tavern where a web developer keeps his records. Try hovering over the bartender.";
+
 const HOVER_DIALOGS = [
-  '"Need something? I\'ve got a few projects lined up."',
-  "He slides a card across the counter without a word.",
-  '"Take a look. Been working on some things."',
+  "Need something? I've got a few projects lined up.",
+  "Take a look. Been working on some things.",
 ];
 
 export default function Home() {
