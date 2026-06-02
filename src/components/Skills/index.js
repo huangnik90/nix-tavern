@@ -27,6 +27,7 @@ import {
   SiRedux,
   SiStyledcomponents, // perbaikan: huruf C besar
   SiDatadog,
+  SiReactquery,
   SiOpenai,
 } from "react-icons/si";
 import { FaCss3Alt } from "react-icons/fa"; // alternatif untuk CSS3
@@ -47,10 +48,14 @@ import { VscVscode } from "react-icons/vsc";
 const FRONTEND_TOOLS = [
   { name: "React", icon: SiReact },
   { name: "JavaScript", icon: SiJavascript },
-  { name: "CSS3", icon: FaCss3Alt }, // pakai FaCss3Alt
+  { name: "CSS3", icon: FaCss3Alt },
   { name: "Styled Components", icon: SiStyledcomponents },
   { name: "Redux", icon: SiRedux },
+  { name: "Next.js", icon: SiNextdotjs }, // tambah
+  { name: "TanStack Query", icon: SiReactquery }, // tambah
+  { name: "TypeScript", icon: SiTypescript },
   { name: "Zustand", icon: SiDatadog },
+
   { name: "OpenAI API", icon: SiOpenai },
 ];
 
@@ -80,8 +85,6 @@ const RELICS = [
   { name: "Mapbox", icon: SiMapbox },
   { name: "Figma", icon: FaFigma },
   { name: "VS Code", icon: VscVscode },
-  { name: "Next.js", icon: SiNextdotjs },
-  { name: "TypeScript", icon: SiTypescript },
   { name: "Postman", icon: SiPostman },
 ];
 
@@ -256,7 +259,7 @@ export default function Skills() {
           </QuestCard>
         </Grid>
 
-        <ContactPrompt>⚔️ Ready for the next adventure? ⚔️</ContactPrompt>
+        <ContactPrompt>⚔️ Are you looking for me? ⚔️</ContactPrompt>
 
         <ContactButton onClick={() => router.push("/contact")}>
           <span className="btn-icon">✉</span>

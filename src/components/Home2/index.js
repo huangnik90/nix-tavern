@@ -38,10 +38,12 @@ const HOVER_DIALOGS = [
 ];
 
 const NAV_BTNS = [
-  { label: "Projects", path: "/projects", variant: "primary", delay: "0s" },
+  { label: "Projects", path: "/projects", variant: "ghost", delay: "0s" },
+
+  { label: "About", path: "/about", variant: "ghost", delay: "0.21s" },
+
   { label: "Skills", path: "/skills", variant: "ghost", delay: "0.07s" },
   { label: "Contact", path: "/contact", variant: "ghost", delay: "0.14s" },
-  { label: "About", path: "/about", variant: "ghost", delay: "0.21s" },
 ];
 
 const TIMEOUT_SEC = 15;

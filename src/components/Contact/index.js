@@ -206,13 +206,13 @@ export default function Contact() {
                     <div
                       style={{
                         fontFamily: "var(--font-mono)",
-                        fontSize: "0.5625rem",
-                        color: "rgba(180, 30, 30, 0.8)",
+                        fontSize: "0.75rem",
+                        color: "rgba(180, 30, 30, 0.9)",
                         letterSpacing: "0.125rem",
                         textTransform: "uppercase",
                       }}
                     >
-                      ✕ &nbsp;Failed to send. Try again or email directly.
+                      ✗ Failed to send. Try again or email directly.
                     </div>
                   )}
 
