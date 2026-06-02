@@ -171,8 +171,6 @@ export default function Home() {
           e.stopPropagation();
           if (!menuOpen) {
             openMenu();
-          } else {
-            router.push("/projects");
           }
         }}
       >

@@ -184,7 +184,7 @@ export default function About() {
             <span className="btn-arrow">→</span>
           </ContactButton>
         </AboutContainer>
-        <Gap height="1000px" />
+        <Gap height="800px" />
       </ScrollArea>
     </Scene>
   );
