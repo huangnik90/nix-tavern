@@ -281,7 +281,6 @@ export default function Projects() {
             </div>
           </Detail>
         </Content>
-        <Gap height="1000px" />
       </Main>
     </Scene>
   );

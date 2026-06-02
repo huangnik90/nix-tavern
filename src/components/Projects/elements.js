@@ -311,12 +311,14 @@ export const Content = styled.div`
   @media (max-width: 64rem) {
     padding: 1.25rem 1.5rem 3rem;
     gap: 1rem;
+    overflow-y: auto;
   }
 
   /* mobile */
   @media (max-width: 30rem) {
     padding: 1rem 0.75rem 3rem;
     gap: 0.875rem;
+    overflow-y: scroll; /* enable scroll on mobile for better usability */
   }
 `;
 
