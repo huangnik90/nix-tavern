@@ -436,19 +436,22 @@ export const DialogBox = styled.div`
 
   /* Mobile landscape & small tablets */
   @media (max-width: 48rem) {
-    bottom: 8rem;
+    bottom: auto; /* lepas bottom fixed */
+    top: auto;
+    bottom: calc(
+      1rem + env(safe-area-inset-bottom, 1rem)
+    ); /* jamin ada jarak */
     left: 1rem;
     right: 1rem;
-    margin-bottom: env(safe-area-inset-bottom, 1rem);
+    margin-bottom: 0; /* gak perlu margin-bottom karena bottom sudah pakai safe area */
   }
 
   /* Mobile portrait (iPhone) */
   @media (max-width: 30rem) {
-    bottom: 9rem;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom, 1.5rem));
     left: 0.75rem;
     right: 0.75rem;
     padding: 0.875rem 1rem 0.75rem;
-    margin-bottom: env(safe-area-inset-bottom, 1.5rem);
   }
 `;
 
