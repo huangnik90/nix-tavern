@@ -128,7 +128,7 @@ export const ScrollArea = styled.div`
 
   @media (max-width: 48rem) {
     align-items: flex-start;
-    padding: 1.5rem 1rem 3rem;
+    padding: 1.5rem 1rem calc(3rem + env(safe-area-inset-bottom, 0rem)); // tambah safe area
   }
 `;
 
