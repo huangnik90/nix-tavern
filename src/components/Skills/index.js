@@ -17,8 +17,19 @@ import {
   RelicGrid,
   RelicTag,
   ContractItem,
+  ContactButton,
+  ContactPrompt,
 } from "./elements";
 
+import {
+  SiReact,
+  SiJavascript,
+  SiRedux,
+  SiStyledcomponents, // perbaikan: huruf C besar
+  SiDatadog,
+  SiOpenai,
+} from "react-icons/si";
+import { FaCss3Alt } from "react-icons/fa"; // alternatif untuk CSS3
 import { FaGitAlt, FaGithub, FaFigma, FaAws } from "react-icons/fa";
 
 import {
@@ -33,13 +44,14 @@ import { TbBolt, TbPlugConnected, TbApi } from "react-icons/tb";
 import { VscVscode } from "react-icons/vsc";
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const FRONTEND_SKILLS = [
-  { name: "React / Next.js", level: "MASTER", pct: "95%", delay: "0.1s" },
-  { name: "JavaScript ES6+", level: "ELITE", pct: "90%", delay: "0.2s" },
-  { name: "CSS3 / HTML5", level: "EXPERT", pct: "88%", delay: "0.3s" },
-  { name: "Styled Components", level: "EXPERT", pct: "95%", delay: "0.4s" },
-  { name: "TypeScript", level: "EXPERT", pct: "88%", delay: "0.5s" },
-  { name: "Redux", level: "MASTER", pct: "92%", delay: "0.6s" },
+const FRONTEND_TOOLS = [
+  { name: "React", icon: SiReact },
+  { name: "JavaScript", icon: SiJavascript },
+  { name: "CSS3", icon: FaCss3Alt }, // pakai FaCss3Alt
+  { name: "Styled Components", icon: SiStyledcomponents },
+  { name: "Redux", icon: SiRedux },
+  { name: "Zustand", icon: SiDatadog },
+  { name: "OpenAI API", icon: SiOpenai },
 ];
 
 const INFRA_SKILLS = [
@@ -75,6 +87,18 @@ const RELICS = [
 
 const CONTRACTS = [
   {
+    name: "Gaudt Dashboard",
+    role: "Global Route Mapping Platform · Ongoing",
+    status: "active",
+    label: "ACTIVE",
+  },
+  {
+    name: "Mobadas",
+    role: "Japan Coastal Sea Level Mapping System · Ongoing",
+    status: "active",
+    label: "ACTIVE",
+  },
+  {
     name: "Allianz Global",
     role: "Insurance Industry · 18 Months",
     status: "completed",
@@ -87,22 +111,10 @@ const CONTRACTS = [
     label: "COMPLETED",
   },
   {
-    name: "Toyota Motors",
+    name: "Toyota Events Portal",
     role: "Automotive Industry · Event Management App",
     status: "completed",
     label: "COMPLETED",
-  },
-  {
-    name: "Gaudt Dashboard",
-    role: "Global Route Mapping Platform · Ongoing",
-    status: "active",
-    label: "ACTIVE",
-  },
-  {
-    name: "Mobadas",
-    role: "Japan Coastal Sea Level Mapping System · Ongoing",
-    status: "active",
-    label: "ACTIVE",
   },
 ];
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -173,20 +185,17 @@ export default function Skills() {
               <span className="card-title">Frontend Core</span>
               <span className="card-rank">Master Rank</span>
             </div>
-            {FRONTEND_SKILLS.map((s) => (
-              <SkillRow key={s.name} $pct={s.pct} $delay={s.delay}>
-                <div className="skill-meta">
-                  <span className="skill-name">{s.name}</span>
-                  <span>
-                    <span className="skill-level">{s.level}</span>
-                    <span className="skill-pct">{s.pct}</span>
-                  </span>
-                </div>
-                <div className="bar-track">
-                  <div className="bar-fill" />
-                </div>
-              </SkillRow>
-            ))}
+            <RelicGrid>
+              {FRONTEND_TOOLS.map((tool) => {
+                const Icon = tool.icon;
+                return (
+                  <RelicTag key={tool.name}>
+                    <Icon size={28} />
+                    <span>{tool.name}</span>
+                  </RelicTag>
+                );
+              })}
+            </RelicGrid>
           </QuestCard>
 
           {/* ── Relics & Tools ── */}
@@ -246,6 +255,14 @@ export default function Skills() {
             ))}
           </QuestCard>
         </Grid>
+
+        <ContactPrompt>⚔️ Ready for the next adventure? ⚔️</ContactPrompt>
+
+        <ContactButton onClick={() => router.push("/contact")}>
+          <span className="btn-icon">✉</span>
+          <span className="btn-text">Send a Raven</span>
+          <span className="btn-arrow">→</span>
+        </ContactButton>
       </ScrollArea>
     </Scene>
   );

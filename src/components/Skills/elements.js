@@ -552,3 +552,82 @@ export const ContractItem = styled.div`
       `}
   }
 `;
+
+export const ContactButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: fit-content;
+  margin: 2.5rem auto 0 auto;
+  padding: 0.75rem 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--primary-dim);
+  border-radius: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.25rem;
+  text-transform: uppercase;
+  color: var(--primary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(4px);
+
+  .btn-icon {
+    font-size: 1rem;
+    transition: transform 0.2s;
+  }
+
+  .btn-arrow {
+    font-size: 1rem;
+    transition: transform 0.2s;
+  }
+
+  &:hover {
+    background: rgba(245, 166, 35, 0.15);
+    border-color: var(--primary);
+    box-shadow: 0 0 0.75rem rgba(245, 166, 35, 0.3);
+    gap: 1rem;
+  }
+
+  &:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  &:hover .btn-icon {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 48rem) {
+    width: calc(100% - 2rem); /* full width dengan margin horizontal */
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 1rem 1.5rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.3rem;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  @media (max-width: 30rem) {
+    padding: 0.875rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.2rem;
+  }
+`;
+
+export const ContactPrompt = styled.div`
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.125rem;
+  color: var(--primary-dim);
+  margin: 1rem 0 0.75rem 0;
+  text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    font-size: 0.5rem;
+    margin: 0.5rem 0 0.5rem 0;
+  }
+`;
