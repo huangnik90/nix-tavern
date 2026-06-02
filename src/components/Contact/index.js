@@ -238,7 +238,7 @@ export default function Contact() {
             )}
           </LedgerForm>
         </ContactLayout>
-        <Gap height="1800px" />
+        <Gap height="1200px" />
       </ScrollArea>
     </Scene>
   );

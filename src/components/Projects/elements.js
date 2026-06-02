@@ -376,7 +376,6 @@ export const WantedPoster = styled.div`
 
   .poster-img-wrap {
     position: relative;
-    /* fluid height based on viewport */
     height: clamp(10rem, 35vh, 28rem);
     overflow: hidden;
     background: #1a0e04;
@@ -388,6 +387,11 @@ export const WantedPoster = styled.div`
       height: 100%;
       object-fit: cover;
       object-position: top;
+    }
+
+    /* Mobile: tinggi lebih kecil */
+    @media (max-width: 48rem) {
+      height: clamp(6rem, 25vh, 18rem);
     }
   }
 
