@@ -189,7 +189,7 @@ export const MusicBtn = styled.button`
 
 export const BartenderWrap = styled.div`
   position: absolute;
-  bottom: 5.5rem;
+  bottom: 12rem;
   left: 50%;
   transform: translateX(-50%);
   width: clamp(16rem, 38vw, 32rem);
@@ -198,18 +198,21 @@ export const BartenderWrap = styled.div`
   z-index: 5;
   animation: ${breathe} 4s ease-in-out infinite;
 
-  /* tablet */
-  @media (max-width: 64rem) {
-    width: clamp(18rem, 55vw, 28rem);
-    height: clamp(22rem, 50vh, 32rem);
-    bottom: 6rem;
-  }
-
   /* mobile */
   @media (max-width: 30rem) {
     width: clamp(16rem, 75vw, 22rem);
     height: clamp(20rem, 52vh, 28rem);
-    bottom: 7rem;
+    bottom: 16rem;
+  }
+
+  @media (min-width: 48rem) and (max-width: 80rem) {
+    bottom: 17rem; /* atur posisi vertikal */
+    width: clamp(26rem, 55vw, 36rem); /* contoh lebih besar */
+    height: clamp(30rem, 65vh, 42rem);
+    .idle,
+    .glass {
+      transform: scale(1.5); /* perbesaran 50% */
+    }
   }
 
   &:hover .idle {
@@ -230,7 +233,9 @@ export const BartenderWrap = styled.div`
     height: 100%;
     object-fit: contain;
     object-position: bottom center;
-    transition: opacity 0.25s ease;
+    transition:
+      opacity 0.25s ease,
+      transform 0.2s ease;
     user-select: none;
     pointer-events: none;
   }
@@ -240,6 +245,26 @@ export const BartenderWrap = styled.div`
   }
   .glass {
     opacity: 0;
+  }
+
+  /* perbesaran langsung pada gambar */
+  @media (min-width: 80rem) {
+    .idle,
+    .glass {
+      transform: scale(1.15); /* desktop +15% */
+    }
+  }
+  @media (max-width: 48rem) {
+    .idle,
+    .glass {
+      transform: scale(1.5); /* iPad +50% */
+    }
+  }
+  @media (max-width: 30rem) {
+    .idle,
+    .glass {
+      transform: scale(1.3); /* mobile +30% */
+    }
   }
 
   .glow {
@@ -401,11 +426,29 @@ export const DialogBox = styled.div`
     transition: width 1s linear;
   }
 
-  @media (max-width: 30rem) {
-    bottom: 7.5rem;
+  /* ===== RESPONSIVE ===== */
+  /* iPad (landscape & portrait) */
+  @media (min-width: 48rem) and (max-width: 80rem) {
+    bottom: 7rem;
+    left: 2rem;
+    right: 2rem;
+  }
+
+  /* Mobile landscape & small tablets */
+  @media (max-width: 48rem) {
+    bottom: 8rem;
     left: 1rem;
     right: 1rem;
+    margin-bottom: env(safe-area-inset-bottom, 1rem);
+  }
+
+  /* Mobile portrait (iPhone) */
+  @media (max-width: 30rem) {
+    bottom: 9rem;
+    left: 0.75rem;
+    right: 0.75rem;
     padding: 0.875rem 1rem 0.75rem;
+    margin-bottom: env(safe-area-inset-bottom, 1.5rem);
   }
 `;
 
