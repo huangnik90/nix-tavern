@@ -6,7 +6,6 @@
   --primary-faint: rgba(245, 166, 35, 0.12);
   --secondary: #3e2723;
   --tertiary: #1a1412;
-  --neutral: #f0ebe6;
   --neutral-dim: rgba(240, 220, 190, 0.75); /* lebih terang dan lebih opaque */
   --bg: #1a1412;
   --dialog-bg: rgba(26, 20, 18, 0.95);
@@ -15,6 +14,7 @@
   --font-body: "Crimson Text", serif;
   --font-mono: "JetBrains Mono", monospace;
   --white: #f3e7d0;
+  --neutral: #f5f0e8;
 }
 
 *,
