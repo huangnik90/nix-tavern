@@ -467,3 +467,11 @@ export const SuccessMsg = styled.div`
     font-style: normal;
   }
 `;
+
+export const Gap = styled.div`
+  display: none;
+  @media (max-width: 48rem) {
+    display: block;
+    height: ${({ height }) => height || "100px"};
+  }
+`;

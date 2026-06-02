@@ -15,6 +15,7 @@ import {
   FieldWrap,
   SubmitBtn,
   SuccessMsg,
+  Gap,
 } from "./elements";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -237,6 +238,7 @@ export default function Contact() {
             )}
           </LedgerForm>
         </ContactLayout>
+        <Gap height="100px" />
       </ScrollArea>
     </Scene>
   );
