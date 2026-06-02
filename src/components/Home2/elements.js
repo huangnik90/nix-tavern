@@ -449,7 +449,7 @@ export const DialogBox = styled.div`
   /* Mobile portrait (iPhone) */
   @media (max-width: 30rem) {
     bottom: calc(
-      11rem + env(safe-area-inset-bottom, 2rem)
+      21rem + env(safe-area-inset-bottom, 2rem)
     ); /* naikkan jadi 11rem + safe area */
     left: 0.75rem;
     right: 0.75rem;
