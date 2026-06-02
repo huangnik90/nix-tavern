@@ -267,7 +267,7 @@ export default function Skills() {
           <span className="btn-text">Send a Raven</span>
           <span className="btn-arrow">→</span>
         </ContactButton>
-        <Gap height="800px" />
+        <Gap height="200px" />
       </ScrollArea>
     </Scene>
   );
