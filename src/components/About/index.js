@@ -18,6 +18,7 @@ import {
   ContactPrompt,
   ContactButton,
 } from "./elements";
+import { Gap } from "../Contact/elements";
 
 const WorkHistory = [
   {
@@ -183,6 +184,7 @@ export default function About() {
             <span className="btn-arrow">→</span>
           </ContactButton>
         </AboutContainer>
+        <Gap height="1000px" />
       </ScrollArea>
     </Scene>
   );
