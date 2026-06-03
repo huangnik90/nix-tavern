@@ -57,9 +57,6 @@ export default function Navbar() {
       {/* Mobile dropdown */}
       {menuOpen && (
         <MobileMenu onClick={() => setMenuOpen(false)}>
-          <span className="mobile-link" onClick={() => navigate("/")}>
-            ← Back to Bar
-          </span>
           {NAV_LINKS.map((link) => (
             <span
               key={link.path}

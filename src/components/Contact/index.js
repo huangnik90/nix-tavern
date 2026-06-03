@@ -18,6 +18,7 @@ import {
 } from "./elements";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import NixNavbar from "../shared/NixNavbar";
 
 export default function Contact() {
   const router = useRouter();
@@ -64,13 +65,7 @@ export default function Contact() {
       <BgImage src="/images/tavern-bg.png" alt="tavern" />
       <Overlay />
 
-      <Navbar>
-        <span className="back" onClick={() => router.push("/")}>
-          ← back to bar
-        </span>
-        <span className="title">NIX</span>
-        <span className="spacer" />
-      </Navbar>
+      <NixNavbar />
 
       <MusicBtn
         $playing={playing}

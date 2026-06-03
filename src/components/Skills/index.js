@@ -32,7 +32,7 @@ import {
 } from "react-icons/si";
 import { FaCss3Alt } from "react-icons/fa"; // alternatif untuk CSS3
 import { FaGitAlt, FaGithub, FaFigma, FaAws } from "react-icons/fa";
-
+import NixNavbar from "../shared/NixNavbar";
 import {
   SiVercel,
   SiMapbox,
@@ -130,14 +130,7 @@ export default function Skills() {
     <Scene>
       <BgImage src="/images/tavern-bg.png" alt="tavern" />
       <Overlay />
-
-      <Navbar>
-        <span className="back" onClick={() => router.push("/")}>
-          ← back to bar
-        </span>
-        <span className="title">NIX</span>
-        <span className="spacer" />
-      </Navbar>
+      <NixNavbar />
 
       <MusicBtn
         $playing={playing}

@@ -22,8 +22,8 @@ export const NavbarWrap = styled.nav`
 
   .nav-back {
     font-family: var(--font-mono);
-    font-size: 0.625rem;
-    font-weight: 600;
+    font-size: 0.75rem; /* naik dari 0.625rem */
+    font-weight: 700; /* tambah bold */
     color: var(--primary-dim);
     letter-spacing: 0.125rem;
     cursor: pointer;
@@ -59,8 +59,8 @@ export const NavbarWrap = styled.nav`
 
   .nav-link {
     font-family: var(--font-mono);
-    font-size: 0.5625rem;
-    font-weight: 600;
+    font-size: 0.75rem; /* naik dari 0.5625rem */
+    font-weight: 700; /* tambah bold */
     color: var(--primary-dim);
     letter-spacing: 0.15rem;
     cursor: pointer;
@@ -156,12 +156,12 @@ export const MobileMenu = styled.div`
 
   .mobile-link {
     font-family: var(--font-mono);
-    font-size: 0.625rem;
-    font-weight: 600;
+    font-size: 0.75rem; /* naik dari 0.625rem */
+    font-weight: 700; /* tambah bold */
     color: var(--primary-dim);
     letter-spacing: 0.2rem;
     text-transform: uppercase;
-    padding: 0.75rem 0.5rem;
+    padding: 0.875rem 0.5rem; /* sedikit lebih tinggi touch target */
     cursor: pointer;
     border-bottom: 1px solid rgba(245, 166, 35, 0.08);
     transition: color 0.2s;

@@ -18,7 +18,7 @@ import {
 } from "./elements";
 import { useMusic } from "../../pages/_app";
 import { MusicBtn } from "../Home/elements";
-
+import NixNavbar from "../shared/NixNavbar";
 // ─── Projects Data ────────────────────────────────────────────────────────────
 const PROJECTS = [
   {
@@ -132,13 +132,7 @@ export default function Projects() {
         <span className="note">{playing ? "♫" : "♪"}</span>
       </MusicBtn>
       {/* ── Navbar ── */}
-      <Navbar>
-        <span className="back" onClick={() => router.push("/")}>
-          ← back to bar
-        </span>
-        <span className="title">NIX</span>
-        <span className="spacer" />
-      </Navbar>
+      <NixNavbar />
 
       <Main>
         {/* ── Sidebar ── */}

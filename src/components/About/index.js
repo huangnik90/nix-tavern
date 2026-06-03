@@ -19,6 +19,8 @@ import {
   ContactButton,
 } from "./elements";
 
+import NixNavbar from "../shared/NixNavbar";
+
 const WorkHistory = [
   {
     title: "Frontend Web Developer",
@@ -98,13 +100,7 @@ export default function About() {
       <BgImage src="/images/tavern-bg.png" alt="tavern" />
       <Overlay />
 
-      <Navbar>
-        <span className="back" onClick={() => router.push("/")}>
-          ← back to bar
-        </span>
-        <span className="title">NIX</span>
-        <span className="spacer" />
-      </Navbar>
+      <NixNavbar />
 
       <MusicBtn
         $playing={playing}
