@@ -113,6 +113,25 @@ const PROJECTS = [
     github: null,
     nda: false,
   },
+  {
+    id: 8,
+    name: "Leadership Capability Journey",
+    title: "Enterprise Leadership Development Platform",
+    industry: "FMCG Industry",
+    description:
+      "A self-guided leadership development platform designed to help employees understand, assess, and strengthen their leadership capabilities. Features personalized development journeys, career navigation tools, leadership frameworks, 360 assessment guidance, capability gap identification, learning pathways, and access to enterprise learning resources.",
+    techs: [
+      "Next.js",
+      "React",
+      "Styled Components",
+      "SharePoint",
+      "Power Apps",
+    ],
+    screenshot: "/images/leadership-journey.png",
+    live: null,
+    github: "https://github.com/treeclouds/bat-leadership",
+    nda: true,
+  },
 ];
 
 export default function Projects() {
