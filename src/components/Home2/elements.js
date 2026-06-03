@@ -428,34 +428,20 @@ export const DialogBox = styled.div`
   }
 
   /* ===== RESPONSIVE ===== */
-  /* iPad (landscape & portrait) */
-  @media (min-width: 48rem) and (max-width: 80rem) {
+
+  /* iPad portrait & landscape (~768px–1024px) */
+  @media (min-width: 48rem) and (max-width: 64rem) {
     bottom: 7rem;
     left: 2rem;
     right: 2rem;
   }
 
-  /* Mobile landscape & small tablets */
-  @media (max-width: 48rem) {
-    bottom: auto; /* lepas bottom fixed */
-    top: auto;
-    bottom: calc(
-      1rem + env(safe-area-inset-bottom, 1rem)
-    ); /* jamin ada jarak */
-    left: 1rem;
-    right: 1rem;
-    margin-bottom: 0; /* gak perlu margin-bottom karena bottom sudah pakai safe area */
-  }
-
-  /* Mobile portrait (iPhone) */
+  /* Mobile — semua iPhone */
   @media (max-width: 30rem) {
-    bottom: calc(
-      17rem + env(safe-area-inset-bottom, 2rem)
-    ); /* naikkan jadi 11rem + safe area */
+    bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px) + 0.5rem);
     left: 0.75rem;
     right: 0.75rem;
     padding: 0.875rem 1rem 0.75rem;
-    margin-bottom: 0;
   }
 `;
 
