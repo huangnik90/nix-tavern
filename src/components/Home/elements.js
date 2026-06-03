@@ -189,7 +189,7 @@ export const Brand = styled.div`
 
 export const MusicBtn = styled.button`
   position: absolute;
-  top: 1.25rem;
+  top: 3.25rem;
   right: 1.25rem;
   width: 2.25rem;
   height: 2.25rem;
