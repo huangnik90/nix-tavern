@@ -117,7 +117,7 @@ export default function About() {
               <CharacterImage src="/images/bartender-nix-2.png" alt="Nix" />
 
               <CharacterInfo>
-                <div className="name">Nix</div>
+                <div className="name">Nikolas Wijaya</div>
 
                 <div className="class">Frontend Bartender</div>
 
