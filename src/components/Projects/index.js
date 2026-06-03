@@ -122,7 +122,7 @@ export default function Projects() {
   const { playing, toggleMusic } = useMusic();
   return (
     <Scene>
-      <BgImage src="/images/project_1.png" alt="tavern wall" />
+      <BgImage src="/images/project_2.png" alt="tavern wall" />
       <Overlay />
       <MusicBtn
         $playing={playing}

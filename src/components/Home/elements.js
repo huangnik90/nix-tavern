@@ -1,13 +1,30 @@
 import styled, { keyframes, css } from "styled-components";
 
 // ─── Animations ───────────────────────────────────────────────────────────────
+
 const breathe = keyframes`
   0%, 100% { transform: translateX(-50%) translateY(0px); }
-  50%       { transform: translateX(-50%) translateY(-6px); }
+  50%       { transform: translateX(-50%) translateY(-8px); }
+`;
+
+// Staggered entrance animations
+const fadeInDown = keyframes`
+  from { opacity: 0; transform: translateY(-1rem); }
+  to   { opacity: 1; transform: translateY(0); }
+`;
+
+const fadeInUp = keyframes`
+  from { opacity: 0; transform: translateY(1.5rem); }
+  to   { opacity: 1; transform: translateY(0); }
+`;
+
+const fadeInScale = keyframes`
+  from { opacity: 0; transform: translateX(-50%) translateY(2rem) scale(0.96); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
 `;
 
 const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(0.5rem); }
   to   { opacity: 1; transform: translateY(0); }
 `;
 
@@ -15,12 +32,12 @@ const floatDust = keyframes`
   0%   { opacity: 0;   transform: translateY(0) translateX(0); }
   15%  { opacity: 1; }
   85%  { opacity: 0.4; }
-  100% { opacity: 0;   transform: translateY(-110px) translateX(12px); }
+  100% { opacity: 0;   transform: translateY(-7rem) translateX(0.75rem); }
 `;
 
 const glowPulse = keyframes`
   0%, 100% { opacity: 0.15; }
-  50%       { opacity: 0.3; }
+  50%       { opacity: 0.35; }
 `;
 
 const pulseRing = keyframes`
@@ -35,8 +52,13 @@ const noteBounce = keyframes`
 `;
 
 const btnFadeUp = keyframes`
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(0.375rem); }
   to   { opacity: 1; transform: translateY(0); }
+`;
+
+const hintBlink = keyframes`
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.9; }
 `;
 
 // ─── Scene ────────────────────────────────────────────────────────────────────
@@ -45,26 +67,68 @@ export const Scene = styled.div`
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   cursor: default;
 `;
 
-export const BgImage = styled.img`
+// Mouse-follow ambient glow
+export const MouseGlow = styled.div.attrs(({ $x, $y }) => ({
+  style: {
+    left: `${$x}px`,
+    top: `${$y}px`,
+  },
+}))`
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 40rem;
+  height: 40rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(245, 166, 35, 0.045) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  transition:
+    left 0.12s ease-out,
+    top 0.12s ease-out;
+
+  @media (hover: none) {
+    display: none;
+  }
+`;
+
+export const BgImage = styled.img.attrs(({ $x, $y }) => ({
+  style: {
+    transform: `translate(${$x}px, ${$y}px)`,
+  },
+}))`
+  position: absolute;
+  inset: -3%;
+  width: 106%;
+  height: 106%;
   object-fit: cover;
   object-position: center top;
   user-select: none;
   pointer-events: none;
+  will-change: transform;
+  transition: transform 0.08s ease-out;
 `;
 
 export const Overlay = styled.div`
   position: absolute;
   inset: 0;
-  background: var(--overlay);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.7) 80%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
   pointer-events: none;
+  z-index: 1;
 `;
 
 // ─── Dust ─────────────────────────────────────────────────────────────────────
@@ -75,6 +139,7 @@ export const DustParticle = styled.span`
   background: rgba(245, 166, 35, 0.2);
   box-shadow: 0 0 6px rgba(245, 166, 35, 0.25);
   pointer-events: none;
+  z-index: 3;
   animation: ${floatDust} ${({ $duration }) => $duration || "9s"} linear
     infinite;
   animation-delay: ${({ $delay }) => $delay || "0s"};
@@ -84,30 +149,21 @@ export const DustParticle = styled.span`
   top: ${({ $top }) => $top};
 `;
 
-// ─── Navbar ───────────────────────────────────────────────────────────────────
+// ─── Brand ────────────────────────────────────────────────────────────────────
 
-export const Navbar = styled.nav`
+export const Brand = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3.75rem;
-  display: flex;
-  align-items: center;
-  padding: 0 2rem;
+  top: 1.25rem;
+  left: 1.75rem;
   z-index: 10;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.7) 0%,
-    transparent 100%
-  );
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  pointer-events: none;
 
-  .brand {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    line-height: 1;
-  }
+  /* staggered entrance */
+  opacity: 0;
+  animation: ${fadeInDown} 0.6s ease 0.2s forwards;
 
   .brand-main {
     font-family: var(--font-display);
@@ -116,79 +172,16 @@ export const Navbar = styled.nav`
     color: var(--primary);
     letter-spacing: 0.625rem;
     text-transform: uppercase;
-    text-shadow: 0 0 2.5rem rgba(245, 166, 35, 0.3);
+    text-shadow: 0 0 2rem rgba(245, 166, 35, 0.35);
   }
 
   .brand-sub {
-    font-size: clamp(0.4rem, 1vw, 0.5625rem);
-    color: rgba(245, 166, 35, 0.5);
+    font-size: clamp(0.375rem, 0.9vw, 0.5rem);
+    color: rgba(245, 166, 35, 0.45);
     letter-spacing: 0.3125rem;
     text-transform: uppercase;
     margin-top: 0.25rem;
     font-family: var(--font-mono);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-
-    @media (max-width: 30rem) {
-      gap: 1rem;
-    }
-  }
-
-  .nav-link {
-    font-size: clamp(0.5rem, 1.2vw, 0.8rem);
-    font-weight: 800;
-    color: rgba(220, 180, 80, 0.7);
-    letter-spacing: 0.1875rem;
-    cursor: pointer;
-    transition: color 0.2s;
-    text-transform: uppercase;
-    padding-bottom: 0.1875rem;
-    border-bottom: 1px solid transparent;
-    font-family: var(--font-mono);
-
-    &.active {
-      color: #f0c866;
-      border-bottom-color: rgba(240, 180, 60, 0.5);
-    }
-
-    &:hover {
-      color: rgba(232, 184, 74, 0.9);
-    }
-  }
-
-  .nav-icons {
-    display: flex;
-    gap: 0.625rem;
-    margin-left: 2rem;
-
-    @media (max-width: 30rem) {
-      margin-left: 1rem;
-      gap: 0.375rem;
-    }
-  }
-
-  .nav-icon {
-    width: 1.875rem;
-    height: 1.875rem;
-    border-radius: 50%;
-    border: 1px solid rgba(180, 120, 40, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition:
-      border-color 0.2s,
-      color 0.2s;
-    font-size: 0.75rem;
-    color: rgba(200, 155, 55, 0.55);
-
-    &:hover {
-      border-color: rgba(232, 184, 74, 0.55);
-      color: rgba(232, 184, 74, 0.9);
-    }
   }
 `;
 
@@ -196,7 +189,7 @@ export const Navbar = styled.nav`
 
 export const MusicBtn = styled.button`
   position: absolute;
-  top: 4.25rem;
+  top: 1.25rem;
   right: 1.25rem;
   width: 2.25rem;
   height: 2.25rem;
@@ -209,6 +202,10 @@ export const MusicBtn = styled.button`
   z-index: 10;
   transition: all 0.2s;
   cursor: pointer;
+
+  /* staggered entrance */
+  opacity: 0;
+  animation: ${fadeInDown} 0.6s ease 0.35s forwards;
 
   &::before {
     content: "";
@@ -251,15 +248,35 @@ export const MusicBtn = styled.button`
 // ─── Bartender ────────────────────────────────────────────────────────────────
 
 export const BartenderWrap = styled.div`
-  animation: ${breathe} 3.5s ease-in-out infinite;
   position: absolute;
-  bottom: 180px;
+  bottom: 12rem;
   left: 50%;
   transform: translateX(-50%);
-  width: clamp(14rem, 30vw, 26rem);
-  height: clamp(18rem, 40vh, 29rem);
+  width: clamp(16rem, 38vw, 32rem);
+  height: clamp(20rem, 55vh, 38rem);
   cursor: pointer;
   z-index: 5;
+
+  /* entrance first, then breathe takes over */
+  animation:
+    ${fadeInScale} 0.8s ease 0.5s both,
+    ${breathe} 4s ease-in-out 1.3s infinite;
+
+  @media (max-width: 30rem) {
+    width: clamp(16rem, 75vw, 22rem);
+    height: clamp(20rem, 52vh, 28rem);
+    bottom: 16rem;
+  }
+
+  @media (min-width: 48rem) and (max-width: 80rem) {
+    bottom: 17rem;
+    width: clamp(26rem, 55vw, 36rem);
+    height: clamp(30rem, 65vh, 42rem);
+    .idle,
+    .glass {
+      transform: scale(1.5);
+    }
+  }
 
   &:hover .idle {
     opacity: 0;
@@ -268,9 +285,6 @@ export const BartenderWrap = styled.div`
     opacity: 1;
   }
   &:hover .glow {
-    opacity: 1;
-  }
-  &:hover .tip {
     opacity: 1;
   }
 
@@ -282,7 +296,9 @@ export const BartenderWrap = styled.div`
     height: 100%;
     object-fit: contain;
     object-position: bottom center;
-    transition: opacity 0.22s ease;
+    transition:
+      opacity 0.25s ease,
+      transform 0.2s ease;
     user-select: none;
     pointer-events: none;
   }
@@ -294,38 +310,38 @@ export const BartenderWrap = styled.div`
     opacity: 0;
   }
 
+  @media (min-width: 80rem) {
+    .idle,
+    .glass {
+      transform: scale(1.15);
+    }
+  }
+  @media (max-width: 48rem) {
+    .idle,
+    .glass {
+      transform: scale(1.5);
+    }
+  }
+  @media (max-width: 30rem) {
+    .idle,
+    .glass {
+      transform: scale(1.3);
+    }
+  }
+
   .glow {
     position: absolute;
-    bottom: -6px;
+    bottom: -0.375rem;
     left: 50%;
     transform: translateX(-50%);
-    width: clamp(8rem, 15vw, 11rem);
+    width: clamp(7rem, 18vw, 13rem);
     height: 1rem;
-    background: rgba(220, 170, 50, 0.18);
+    background: rgba(220, 170, 50, 0.2);
     border-radius: 50%;
     opacity: 0;
     transition: opacity 0.3s;
     pointer-events: none;
     animation: ${glowPulse} 2.5s ease-in-out infinite;
-  }
-
-  .tip {
-    position: absolute;
-    top: -2.25rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(232, 184, 74, 0.93);
-    color: #1a0800;
-    font-size: 0.625rem;
-    font-weight: 700;
-    padding: 0.25rem 0.875rem;
-    border-radius: 0.75rem;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.2s;
-    pointer-events: none;
-    letter-spacing: 0.03125rem;
-    font-family: var(--font-mono);
   }
 `;
 
@@ -367,15 +383,18 @@ export const Counter = styled.div`
 
 export const DialogBox = styled.div`
   position: absolute;
-  bottom: 6.25rem;
-  left: 1.75rem;
-  right: 1.75rem;
-  background: var(--dialog-bg);
+  bottom: 6rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  background: rgba(8, 5, 2, 0.92);
   border: 1px solid var(--dialog-border);
   border-radius: 0.25rem;
-  padding: 0.875rem 1.125rem 0.75rem;
+  padding: 1rem 1.25rem 0.875rem;
   z-index: 8;
-  animation: ${fadeIn} 0.4s ease both;
+
+  /* staggered entrance */
+  opacity: 0;
+  animation: ${fadeInUp} 0.7s ease 0.9s forwards;
 
   &::before {
     content: "";
@@ -387,7 +406,6 @@ export const DialogBox = styled.div`
     border-top: 1px solid rgba(220, 165, 45, 0.55);
     border-left: 1px solid rgba(220, 165, 45, 0.55);
   }
-
   &::after {
     content: "";
     position: absolute;
@@ -428,46 +446,86 @@ export const DialogBox = styled.div`
   }
 
   .text {
-    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
-    color: var(--neutral);
-    line-height: 1.65;
+    font-size: clamp(0.9375rem, 2.2vw, 1.125rem);
+    color: #f5f0e8;
+    line-height: 1.7;
     font-family: var(--font-body);
     font-style: italic;
-    transition: opacity 0.2s;
-    min-height: 1.625rem;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    min-height: 1.75rem;
   }
 
   .hint {
-    font-size: 0.5rem;
-    color: rgba(180, 130, 40, 0.35);
-    letter-spacing: 0.09375rem;
-    margin-top: 0.5rem;
-    text-align: right;
+    font-size: clamp(0.5rem, 1.2vw, 0.5625rem);
+    color: rgba(245, 166, 35, 0.5);
+    letter-spacing: 0.15625rem;
+    margin-top: 0.625rem;
+    text-align: center;
     font-family: var(--font-mono);
+    animation: ${hintBlink} 2s ease-in-out infinite;
   }
 
-  /* nav buttons — shown on hover */
   .nav-btns {
     display: flex;
     gap: 0.5rem;
-    margin-top: 0.75rem;
+    margin-top: 0.875rem;
     flex-wrap: wrap;
+
+    @media (max-width: 30rem) {
+      gap: 0.375rem;
+    }
+  }
+
+  .timeout-bar-wrap {
+    margin-top: 0.625rem;
+    height: 0.125rem;
+    background: rgba(245, 166, 35, 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .timeout-bar {
+    height: 100%;
+    background: rgba(245, 166, 35, 0.35);
+    border-radius: 1rem;
+    transition: width 1s linear;
+  }
+
+  /* ===== RESPONSIVE ===== */
+
+  @media (min-width: 48rem) and (max-width: 64rem) {
+    bottom: 7rem;
+    left: 2rem;
+    right: 2rem;
+  }
+
+  @media (max-width: 30rem) {
+    bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px) + 0.5rem);
+    left: 0.75rem;
+    right: 0.75rem;
+    padding: 0.875rem 1rem 0.75rem;
   }
 `;
 
+// ─── Nav Buttons ──────────────────────────────────────────────────────────────
+
 export const NavBtn = styled.button`
   font-family: var(--font-mono);
-  font-size: clamp(0.5rem, 1.2vw, 0.625rem);
+  font-size: clamp(0.5625rem, 1.4vw, 0.6875rem);
   font-weight: 700;
   letter-spacing: 0.125rem;
   text-transform: uppercase;
-  padding: 0.375rem 1rem;
+  padding: 0.4375rem 1.125rem;
   border-radius: 0.1875rem;
   cursor: pointer;
   transition: all 0.18s;
   animation: ${btnFadeUp} 0.25s ${({ $delay }) => $delay || "0s"} ease both;
-  opacity: 0;
-  animation-fill-mode: forwards;
+  white-space: nowrap;
+
+  @media (max-width: 30rem) {
+    padding: 0.375rem 0.875rem;
+    font-size: 0.5625rem;
+  }
 
   ${({ $variant }) =>
     $variant === "primary"
@@ -482,11 +540,12 @@ export const NavBtn = styled.button`
         `
       : css`
           background: transparent;
-          color: var(--primary-dim);
-          border: 1px solid var(--dialog-border);
+          color: rgba(245, 166, 35, 0.75);
+          border: 1px solid rgba(245, 166, 35, 0.3);
           &:hover {
             border-color: var(--primary-dim);
             color: var(--primary);
+            background: rgba(245, 166, 35, 0.06);
           }
         `}
 `;
