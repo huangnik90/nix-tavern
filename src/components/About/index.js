@@ -18,7 +18,6 @@ import {
   ContactPrompt,
   ContactButton,
 } from "./elements";
-import { Gap } from "../Contact/elements";
 
 const WorkHistory = [
   {

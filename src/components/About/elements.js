@@ -99,12 +99,12 @@ export const ScrollArea = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   padding: 1.5rem 2rem 4rem;
+  @media (max-width: 48rem) {
+    padding: 1rem 1rem calc(4rem + env(safe-area-inset-bottom, 0px));
+  }
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
-  }
-  @media (max-width: 48rem) {
-    padding: 1rem 1rem 4rem;
   }
 `;
 
@@ -308,7 +308,7 @@ export const ContactButton = styled.button`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 48rem) {
     width: calc(100% - 2rem);
     margin-left: 1rem;
     margin-right: 1rem;
@@ -317,7 +317,7 @@ export const ContactButton = styled.button`
     letter-spacing: 0.3rem;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 30rem) {
     padding: 0.875rem 1rem;
     font-size: 0.7rem;
     letter-spacing: 0.2rem;
@@ -326,11 +326,11 @@ export const ContactButton = styled.button`
 
 export const AboutGrid = styled.div`
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: 23.75rem 1fr;
   gap: 2rem;
   align-items: start;
 
-  @media (max-width: 968px) {
+  @media (max-width: 60.5rem) {
     grid-template-columns: 1fr;
   }
 `;
@@ -341,10 +341,19 @@ export const CharacterCard = styled.div`
   border-radius: 0.5rem;
   overflow: hidden;
   backdrop-filter: blur(4px);
+
+  @media (min-width: 60.6rem) {
+    /* 1px lebih dari breakpoint collapse */
+    position: sticky;
+    top: 1rem;
+  }
 `;
 
 export const CharacterImage = styled.img`
   width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  object-position: top center;
   display: block;
 `;
 
