@@ -83,6 +83,7 @@ export default function Home() {
   }, []);
 
   function openMenu() {
+    sessionStorage.setItem("nix_visited", "1");
     // pick a random hover dialog
     const line =
       HOVER_DIALOGS[Math.floor(Math.random() * HOVER_DIALOGS.length)];
@@ -110,6 +111,11 @@ export default function Home() {
       closeMenu();
     }, TIMEOUT_SEC * 1000);
   }
+
+  useEffect(() => {
+    const hasVisited = sessionStorage.getItem("nix_visited");
+    if (hasVisited) openMenu();
+  }, []);
 
   function closeMenu() {
     setMenuOpen(false);
