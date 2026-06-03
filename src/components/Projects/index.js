@@ -18,7 +18,6 @@ import {
 } from "./elements";
 import { useMusic } from "../../pages/_app";
 import { MusicBtn } from "../Home/elements";
-import { Gap } from "../Contact/elements";
 
 // ─── Projects Data ────────────────────────────────────────────────────────────
 const PROJECTS = [

@@ -29,6 +29,7 @@ export const Scene = styled.div`
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100dvh; /* gunakan dynamic viewport height untuk mobile */
   overflow: hidden;
   font-family: var(--font-body);
   display: flex;

@@ -43,7 +43,6 @@ import {
 import { TbBolt, TbPlugConnected, TbApi } from "react-icons/tb";
 
 import { VscVscode } from "react-icons/vsc";
-import { Gap } from "../Contact/elements";
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const FRONTEND_TOOLS = [
@@ -267,7 +266,6 @@ export default function Skills() {
           <span className="btn-text">Send a Raven</span>
           <span className="btn-arrow">→</span>
         </ContactButton>
-        <Gap height="200px" />
       </ScrollArea>
     </Scene>
   );
