@@ -549,3 +549,103 @@ export const NavBtn = styled.button`
           }
         `}
 `;
+
+export const WoodenNavbar = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3.5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(58, 26, 6, 0.98) 0%,
+    rgba(48, 20, 5, 0.95) 100%
+  );
+  border-bottom: 2px solid rgba(220, 165, 45, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 20;
+  backdrop-filter: blur(4px);
+
+  @media (max-width: 30rem) {
+    height: 3rem;
+    padding: 0 1rem;
+  }
+`;
+
+export const NavbarBrand = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 900;
+    color: var(--primary);
+    letter-spacing: 0.25rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 1rem rgba(245, 166, 35, 0.3);
+  }
+
+  @media (max-width: 30rem) {
+    .logo {
+      font-size: 0.875rem;
+      letter-spacing: 0.125rem;
+    }
+  }
+`;
+
+export const NavbarLinks = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  @media (max-width: 30rem) {
+    gap: 0.375rem;
+  }
+`;
+
+export const NavbarLink = styled.button`
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.125rem;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: rgba(245, 166, 35, 0.7);
+  border: 1px solid rgba(245, 166, 35, 0.25);
+  border-radius: 0.1875rem;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+
+  &:hover {
+    background: rgba(245, 166, 35, 0.08);
+    color: var(--primary);
+    border-color: var(--primary);
+  }
+
+  ${({ $active }) =>
+    $active &&
+    css`
+      background: rgba(245, 166, 35, 0.12);
+      color: var(--primary);
+      border-color: var(--primary);
+    `}
+
+  @media (max-width: 30rem) {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.5625rem;
+  }
+`;

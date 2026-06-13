@@ -35,20 +35,20 @@ const IDLE_DIALOG =
 
 const HOVER_DIALOGS = [
   "What'll it be tonight?",
-  "Need something? I keep records of everything here.",
-  "Take your time. The night is young.",
+  "Need something? I keep records of everything here. we have projects, skills, and even mini games if you're looking to kill some time.",
+  "The latest project is always on tap. Just say the word. we have mini games too, if you're looking to kill some time.",
 ];
 
+// ─── NAV_BTNS: Games jangan navigate, trigger scroll instead ────────────────
 const NAV_BTNS = [
-  { label: "Projects", path: "/projects", variant: "ghost", delay: "0s" },
-  { label: "About", path: "/about", variant: "ghost", delay: "0.07s" },
-  { label: "Skills", path: "/skills", variant: "ghost", delay: "0.14s" },
-  { label: "Contact", path: "/contact", variant: "ghost", delay: "0.21s" },
+  { label: "Projects", path: "/projects", variant: "ghost", delay: "0.07s" },
+  { label: "About", path: "/about", variant: "ghost", delay: "0.14s" },
+  { label: "Skills", path: "/skills", variant: "ghost", delay: "0.21s" },
+  { label: "Contact", path: "/contact", variant: "ghost", delay: "0.28s" },
+  { label: "Mini Games", path: "/games", variant: "ghost", delay: "0s" },
 ];
 
 const TIMEOUT_SEC = 15;
-
-// ─── Parallax strength (lower = more subtle) ──────────────────────────────────
 const PARALLAX_STRENGTH = 12; // px max offset
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -87,14 +87,11 @@ export default function Home() {
   // ── Mouse parallax & glow ────────────────────────────────────────────────────
   useEffect(() => {
     const handleMouseMove = (e) => {
-      // Raw mouse position for glow
       setMousePos({ x: e.clientX, y: e.clientY });
 
-      // Normalise -1 to 1 for parallax
       const nx = (e.clientX / window.innerWidth - 0.5) * 2;
       const ny = (e.clientY / window.innerHeight - 0.5) * 2;
 
-      // rAF so we don't thrash layout
       cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
         setBgOffset({
@@ -143,9 +140,8 @@ export default function Home() {
     }, 1000);
 
     timeoutRef.current = setTimeout(() => closeMenu(), TIMEOUT_SEC * 1000);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
-  // ── sessionStorage: return visit → skip idle ──────────────────────────────────
   useEffect(() => {
     const hasVisited = sessionStorage.getItem("nix_visited");
     if (hasVisited) openMenu();
@@ -163,11 +159,10 @@ export default function Home() {
     if (!menuOpen) openMenu();
   }
 
-  function handleNavClick(e, path) {
+  // ── Handle nav click with scroll support ──
+  function handleNavClick(e, btn) {
     e.stopPropagation();
-    clearTimeout(timeoutRef.current);
-    clearInterval(intervalRef.current);
-    router.push(path);
+    router.push(btn.path);
   }
 
   function handleSceneClick() {
@@ -177,102 +172,108 @@ export default function Home() {
   const timeoutPct = (timeLeft / TIMEOUT_SEC) * 100;
 
   return (
-    <Scene onClick={handleSceneClick}>
-      {/* ── Parallax background ── */}
-      <BgImage
-        src="/images/tavern-bg.png"
-        alt="tavern"
-        $x={bgOffset.x}
-        $y={bgOffset.y}
-      />
+    <>
+      {/* ══════════════════════════════════════════════════════════════════ */}
+      {/* TAVERN SECTION */}
+      {/* ══════════════════════════════════════════════════════════════════ */}
 
-      <Overlay />
-
-      {/* ── Mouse-follow ambient glow ── */}
-      <MouseGlow $x={mousePos.x} $y={mousePos.y} />
-
-      {/* ── Dust particles ── */}
-      {DUST.map((d, i) => (
-        <DustParticle key={i} {...d} />
-      ))}
-
-      {/* ── Brand ── */}
-      <Brand>
-        <span className="brand-main">NIX</span>
-        <span className="brand-sub">portfolio &amp; works</span>
-      </Brand>
-
-      {/* ── Music ── */}
-      <MusicBtn
-        $playing={playing}
-        onClick={(e) => {
-          e.stopPropagation();
-          toggleMusic();
-        }}
-        aria-label="toggle music"
-      >
-        <span className="note">{playing ? "♫" : "♪"}</span>
-      </MusicBtn>
-
-      {/* ── Bartender ── */}
-      <BartenderWrap
-        onMouseEnter={handleBartenderEnter}
-        onClick={(e) => {
-          e.stopPropagation();
-          if (!menuOpen) openMenu();
-        }}
-      >
-        <img
-          className="idle"
-          src="/images/bartender-nix-1.png"
-          alt="bartender"
+      <Scene onClick={handleSceneClick}>
+        {/* ── Parallax background ── */}
+        <BgImage
+          src="/images/tavern-bg.png"
+          alt="tavern"
+          $x={bgOffset.x}
+          $y={bgOffset.y}
         />
-        <img
-          className="glass"
-          src="/images/bartender-nix-2.png"
-          alt="bartender with glass"
-        />
-        <div className="glow" />
-      </BartenderWrap>
 
-      <Counter />
+        <Overlay />
 
-      {/* ── Dialog ── */}
-      <DialogBox onClick={(e) => e.stopPropagation()}>
-        <div className="corner-tr" />
-        <div className="corner-bl" />
-        <div className="tag">SYSTEM MESSAGE</div>
-        <div className="text">{dialogText}</div>
+        {/* ── Mouse-follow ambient glow ── */}
+        <MouseGlow $x={mousePos.x} $y={mousePos.y} />
 
-        {menuOpen ? (
-          <>
-            <div className="nav-btns">
-              {NAV_BTNS.map((btn) => (
-                <NavBtn
-                  key={btn.label}
-                  $variant={btn.variant}
-                  $delay={btn.delay}
-                  onClick={(e) => handleNavClick(e, btn.path)}
-                >
-                  {btn.label}
-                </NavBtn>
-              ))}
+        {/* ── Dust particles ── */}
+        {DUST.map((d, i) => (
+          <DustParticle key={i} {...d} />
+        ))}
+
+        {/* ── Brand ── */}
+        <Brand>
+          <span className="brand-main">NIX</span>
+          <span className="brand-sub">portfolio &amp; works</span>
+        </Brand>
+
+        {/* ── Music ── */}
+        <MusicBtn
+          $playing={playing}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleMusic();
+          }}
+          aria-label="toggle music"
+        >
+          <span className="note">{playing ? "♫" : "♪"}</span>
+        </MusicBtn>
+
+        {/* ── Bartender ── */}
+        <BartenderWrap
+          onMouseEnter={handleBartenderEnter}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (!menuOpen) openMenu();
+          }}
+        >
+          <img
+            className="idle"
+            src="/images/bartender-nix-1.png"
+            alt="bartender"
+          />
+          <img
+            className="glass"
+            src="/images/bartender-nix-2.png"
+            alt="bartender with glass"
+          />
+          <div className="glow" />
+        </BartenderWrap>
+
+        <Counter />
+
+        {/* ── Dialog ── */}
+        <DialogBox onClick={(e) => e.stopPropagation()}>
+          <div className="corner-tr" />
+          <div className="corner-bl" />
+          <div className="tag">SYSTEM MESSAGE</div>
+          <div className="text">{dialogText}</div>
+
+          {menuOpen ? (
+            <>
+              <div className="nav-btns">
+                {NAV_BTNS.map((btn) => (
+                  <NavBtn
+                    key={btn.label}
+                    $variant={btn.variant}
+                    $delay={btn.delay}
+                    onClick={(e) => handleNavClick(e, btn)}
+                  >
+                    {btn.label}
+                  </NavBtn>
+                ))}
+              </div>
+              <div className="timeout-bar-wrap">
+                <div
+                  className="timeout-bar"
+                  style={{ width: `${timeoutPct}%` }}
+                />
+              </div>
+            </>
+          ) : (
+            <div className="hint">
+              {isTouch
+                ? "↑ TAP THE BARTENDER TO BEGIN"
+                : "↑ HOVER THE BARTENDER TO BEGIN"}
             </div>
-            <div className="timeout-bar-wrap">
-              <div
-                className="timeout-bar"
-                style={{ width: `${timeoutPct}%` }}
-              />
-            </div>
-          </>
-        ) : (
-          <div className="hint">
-            {isTouch
-              ? "↑ TAP THE BARTENDER TO BEGIN"
-              : "↑ HOVER THE BARTENDER TO BEGIN"}
-          </div>
-        )}
-      </DialogBox>
-    </Scene>
+          )}
+        </DialogBox>
+      </Scene>
+    </>
   );
 }
