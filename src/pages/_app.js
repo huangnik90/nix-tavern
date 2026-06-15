@@ -32,6 +32,12 @@ export default function App({ Component, pageProps }) {
     <MusicContext.Provider value={{ playing, toggleMusic }}>
       <Head>
         {/* Pindahkan tag viewport dari _document.js ke sini */}
+        <title>Nikolas Wijaya | Software Engineer</title>
+
+        <meta
+          name="description"
+          content="Software Engineer specializing in React, Next.js, TypeScript, and modern web development. Explore my projects, skills, and experience."
+        />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, viewport-fit=cover"
