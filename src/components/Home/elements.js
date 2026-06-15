@@ -649,3 +649,69 @@ export const NavbarLink = styled.button`
     font-size: 0.5625rem;
   }
 `;
+
+const floatBounce = keyframes`
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+`;
+
+const fadeInHint = keyframes`
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+`;
+
+const arrowBounce = keyframes`
+  0%, 100% { transform: translateY(0px); opacity: 0.6; }
+  50%       { transform: translateY(-8px); opacity: 1; }
+`;
+
+export const HintWrapper = styled.div`
+  position: absolute;
+  top: 20%;
+  left: 47%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  pointer-events: none;
+  z-index: 4;
+  animation: ${fadeInHint} 1s ease 1.2s forwards;
+  opacity: 0;
+
+  @media (min-width: 48rem) and (max-width: 64rem) {
+    top: 42%;
+  }
+
+  @media (max-width: 30rem) {
+    top: 40%;
+    left: 40%;
+  }
+`;
+
+export const ArrowIcon = styled.div`
+  font-size: 2.5rem; /* ← BIGGER (was 1.5rem) */
+  color: #f7c948; /* ← FULL OPACITY gold (was rgba with 0.7) */
+  animation: ${arrowBounce} 2s ease-in-out infinite;
+  text-shadow:
+    0 0 12px rgba(247, 201, 72, 0.8),
+    /* ← STRONGER glow */ 0 0 24px rgba(247, 201, 72, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.6);
+  filter: drop-shadow(0 0 6px rgba(247, 201, 72, 0.5));
+  letter-spacing: 0.25rem;
+`;
+
+export const HintText = styled.div`
+  font-family: var(--font-mono);
+  font-size: 0.75rem; /* ← SLIGHTLY BIGGER (was 0.625rem) */
+  color: #f7c948; /* ← FULL OPACITY (was rgba 0.65) */
+  letter-spacing: 0.15625rem;
+  text-transform: uppercase;
+  animation: ${floatBounce} 3s ease-in-out infinite;
+  white-space: nowrap;
+  text-shadow: 0 0 8px rgba(247, 201, 72, 0.6);
+
+  @media (max-width: 30rem) {
+    font-size: 0.6875rem;
+  }
+`;

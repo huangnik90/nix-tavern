@@ -12,6 +12,9 @@ import {
   Counter,
   DialogBox,
   NavBtn,
+  HintWrapper,
+  ArrowIcon,
+  HintText,
 } from "./elements";
 import { useMusic } from "../../pages/_app";
 
@@ -176,7 +179,12 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════════════════ */}
       {/* TAVERN SECTION */}
       {/* ══════════════════════════════════════════════════════════════════ */}
-
+      <HintWrapper>
+        <ArrowIcon>↓</ArrowIcon>
+        <HintText>
+          {isTouch ? "Tap the bartender" : "Hover the bartender"}
+        </HintText>
+      </HintWrapper>
       <Scene onClick={handleSceneClick}>
         {/* ── Parallax background ── */}
         <BgImage
