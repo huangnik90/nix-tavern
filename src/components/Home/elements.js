@@ -691,7 +691,7 @@ export const HintWrapper = styled.div`
   }
 
   @media (max-width: 30rem) {
-    top: 35dvh;
+    top: 15dvh;
     left: 37%;
   }
 `;
