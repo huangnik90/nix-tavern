@@ -665,53 +665,68 @@ const arrowBounce = keyframes`
   50%       { transform: translateY(-8px); opacity: 1; }
 `;
 
+const arrowPulse = keyframes`
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+`;
+// Update di src/components/Home/elements.js
+
 export const HintWrapper = styled.div`
-  position: absolute;
-  top: 20%;
-  left: 47%;
+  position: fixed;
+  top: clamp(80px, 18vh, 200px); /* ← Convert 18% to clamp */
+  left: 47%; /* ← KEEP 47% */
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
   pointer-events: none;
-  z-index: 4;
-  animation: ${fadeInHint} 1s ease 1.2s forwards;
+  z-index: 1000;
   opacity: 0;
+  animation: ${fadeInHint} 1s ease 1.2s forwards;
+  will-change: opacity;
 
   @media (min-width: 48rem) and (max-width: 64rem) {
-    top: 42%;
+    top: clamp(100px, 42vh, 350px); /* ← Convert 42% to clamp */
   }
 
   @media (max-width: 30rem) {
-    top: 40%;
-    left: 40%;
+    top: clamp(120px, 42vh, 280px); /* ← Convert 42% to clamp */
+    left: 37%; /* ← KEEP 37% */
   }
 `;
 
 export const ArrowIcon = styled.div`
-  font-size: 2.5rem; /* ← BIGGER (was 1.5rem) */
-  color: #f7c948; /* ← FULL OPACITY gold (was rgba with 0.7) */
-  animation: ${arrowBounce} 2s ease-in-out infinite;
+  font-size: clamp(1.75rem, 5vw, 2.5rem); /* ← USE clamp for consistency */
+  color: #f7c948;
+  animation:
+    ${arrowBounce} 2s ease-in-out infinite,
+    ${arrowPulse} 3s ease-in-out infinite;
   text-shadow:
     0 0 12px rgba(247, 201, 72, 0.8),
-    /* ← STRONGER glow */ 0 0 24px rgba(247, 201, 72, 0.4),
+    0 0 24px rgba(247, 201, 72, 0.4),
     0 2px 8px rgba(0, 0, 0, 0.6);
   filter: drop-shadow(0 0 6px rgba(247, 201, 72, 0.5));
-  letter-spacing: 0.25rem;
+  line-height: 1;
+  will-change: transform; /* ← ADD: smooth animation */
 `;
 
 export const HintText = styled.div`
   font-family: var(--font-mono);
-  font-size: 0.75rem; /* ← SLIGHTLY BIGGER (was 0.625rem) */
-  color: #f7c948; /* ← FULL OPACITY (was rgba 0.65) */
+  font-size: clamp(0.6rem, 2.5vw, 0.75rem); /* ← USE clamp */
+  color: #f7c948;
   letter-spacing: 0.15625rem;
   text-transform: uppercase;
+  text-align: center;
   animation: ${floatBounce} 3s ease-in-out infinite;
   white-space: nowrap;
   text-shadow: 0 0 8px rgba(247, 201, 72, 0.6);
+  font-weight: 700;
+  will-change: transform; /* ← ADD: smooth animation */
 
   @media (max-width: 30rem) {
-    font-size: 0.6875rem;
+    font-size: 0.65rem;
+    white-space: normal;
+    max-width: 130px;
   }
 `;
