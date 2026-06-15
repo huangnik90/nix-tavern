@@ -691,8 +691,8 @@ export const HintWrapper = styled.div`
   }
 
   @media (max-width: 30rem) {
-    top: clamp(120px, 42vh, 280px); /* ← Convert 42% to clamp */
-    left: 37%; /* ← KEEP 37% */
+    top: 35%;
+    left: 37%;
   }
 `;
 
