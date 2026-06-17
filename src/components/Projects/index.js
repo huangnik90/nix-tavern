@@ -53,7 +53,7 @@ const PROJECTS = [
     title: "Gaudt Dashboard",
     industry: "Logistics & Mapping",
     description:
-      "Built all pages from scratch for a Japanese construction company's internal logistics dashboard. Features interactive Mapbox maps for route planning, real-time traffic congestion detection, and area density analysis to support on-ground fleet decisions.",
+      "Built 20+ pages from scratch for a global urban analytics platform spanning 12+ cities across Asia, Europe, and the Americas. Features include crowd flow visualization, isochrone accessibility mapping, amenities demand heatmaps, and multimodal route planning with real-time fare estimation. Ongoing — 3 years of continuous development and maintenance.",
     techs: ["Next.js", "Mapbox", "React", "Real-time"],
     screenshot: "/images/gaudt.png",
     live: null,
