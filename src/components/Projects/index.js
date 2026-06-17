@@ -27,7 +27,7 @@ const PROJECTS = [
     title: "Paddleco",
     industry: "Sports & Recreation",
     description:
-      "Booking platform with real-time availability, hover interactions, and live updates. Built for a water sports company offering paddleboard lessons, rentals and tours.",
+      "Built a full booking platform for a water sports company — real-time seat availability, live updates via Supabase, and interactive hover experiences. Handles lesson scheduling, rentals, and tour bookings end-to-end.",
     techs: ["Next.js", "Supabase", "React", "Real-time"],
     screenshot: "/images/paddleboard.png",
     live: "https://paddleboard-mu.vercel.app/",
@@ -53,10 +53,9 @@ const PROJECTS = [
     title: "Gaudt Dashboard",
     industry: "Logistics & Mapping",
     description:
-      "Internal logistics dashboard with advanced Mapbox integration for a Japanese company. Real-time fleet tracking and route optimization.",
+      "Built all pages from scratch for a Japanese construction company's internal logistics dashboard. Features interactive Mapbox maps for route planning, real-time traffic congestion detection, and area density analysis to support on-ground fleet decisions.",
     techs: ["Next.js", "Mapbox", "React", "Real-time"],
     screenshot: "/images/gaudt.png",
-
     live: null,
     github: null,
     nda: true,
@@ -67,7 +66,7 @@ const PROJECTS = [
     title: "Enterprise Client",
     industry: "Insurance Industry",
     description:
-      "Internal web application for a major insurance enterprise. Features include agent portal, policy management, and document workflows.",
+      "Developed internal web pages for a major insurance enterprise — including an event portal and pre/post-test assessment flows for client-facing programs. Part of a larger agent and policy management platform.",
     techs: ["React", "Redux", "REST API"],
     screenshot: "/images/allianz.png",
     live: null,
@@ -80,7 +79,7 @@ const PROJECTS = [
     title: "Enterprise Client",
     industry: "FMCG Industry",
     description:
-      "Digital platform built for a leading FMCG company. Involves internal tooling and distributor management workflows.",
+      "Contributed to a large-scale internal platform for a leading FMCG company — resolving hundreds of bug tickets and building new registration flows. High-volume codebase with distributor management and internal tooling.",
     techs: ["React", "Redux", "REST API"],
     screenshot: "/images/bat.png",
     live: null,
@@ -93,7 +92,7 @@ const PROJECTS = [
     title: "Event Check-in App",
     industry: "Automotive Industry",
     description:
-      "Mobile web application for Toyota Dealer Convention in Bali. Handles guest check-in, QR scanning, and real-time attendance tracking for a large-scale corporate event.",
+      "Built a mobile web app for Toyota's Dealer Convention in Bali — guests checked in via QR code scan on arrival and were assigned table seats in real-time. Handled live attendance tracking for a large-scale corporate event.",
     techs: ["Next.js", "React", "Mobile Web"],
     screenshot: "/images/toyota.png",
     live: null,
@@ -106,7 +105,7 @@ const PROJECTS = [
     title: "Fintech Platform",
     industry: "Financial Technology",
     description:
-      "B2B2C and B2C fintech platform focused on digital lending, insurance, and investment services. Built to simplify loan applications, repayments, insurance access, and future investment products including stocks, bonds, and mutual funds.",
+      "Built a Financial Technology platform from scratch — architected both the admin dashboard and user-facing pages. Admin side covers loan management and borrower oversight; user side handles application flows and account views.",
     techs: ["Redux", "Rest API", "React", "Responsive Design"],
     screenshot: "/images/asira.webp",
     live: "https://www.ayannah.com/products",
@@ -119,7 +118,7 @@ const PROJECTS = [
     title: "Enterprise Leadership Development Platform",
     industry: "FMCG Industry",
     description:
-      "A self-guided leadership development platform designed to help employees understand, assess, and strengthen their leadership capabilities. Features personalized development journeys, career navigation tools, leadership frameworks, 360 assessment guidance, capability gap identification, learning pathways, and access to enterprise learning resources.",
+      "Translated a executive PowerPoint presentation into a polished interactive web experience for a CEO-level client presentation. Built quickly under tight deadline while maintaining confidentiality of all internal content.",
     techs: [
       "Next.js",
       "React",

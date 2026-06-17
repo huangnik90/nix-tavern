@@ -31,16 +31,39 @@ export default function App({ Component, pageProps }) {
   return (
     <MusicContext.Provider value={{ playing, toggleMusic }}>
       <Head>
-        {/* Pindahkan tag viewport dari _document.js ke sini */}
-        <title>Nikolas Wijaya | Software Engineer</title>
-
+        <title>Nikolas Wijaya | Web Developer</title>
         <meta
           name="description"
-          content="Software Engineer specializing in React, Next.js, TypeScript, and modern web development. Explore my projects, skills, and experience."
+          content="Frontend Developer specializing in React, Next.js, and TypeScript. Based in Indonesia."
         />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Nikolas Wijaya | Web Developer" />
+        <meta
+          property="og:description"
+          content="Frontend Developer specializing in React, Next.js, and TypeScript. Based in Indonesia."
+        />
+        <meta
+          property="og:image"
+          content="https://www.bynik.my.id/images/og-preview.png"
+        />
+        <meta property="og:url" content="https://www.bynik.my.id" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter/X */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Nikolas Wijaya | Web Developer" />
+        <meta
+          name="twitter:description"
+          content="Frontend Developer specializing in React, Next.js, and TypeScript. Based in Indonesia."
+        />
+        <meta
+          name="twitter:image"
+          content="https://www.bynik.my.id/images/og-preview.png"
         />
       </Head>
       <Component {...pageProps} />
