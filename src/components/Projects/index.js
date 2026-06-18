@@ -53,7 +53,7 @@ const PROJECTS = [
     title: "Gaudt Dashboard",
     industry: "Logistics & Mapping",
     description:
-      "Built 20+ pages from scratch for a global urban analytics platform spanning 12+ cities across Asia, Europe, and the Americas. Features include crowd flow visualization, isochrone accessibility mapping, amenities demand heatmaps, and multimodal route planning with real-time fare estimation. Ongoing — 3 years of continuous development and maintenance.",
+      "Built 20+ pages from scratch for a global urban analytics platform (Nippon Koei) spanning 12+ cities across Asia, Europe, and the Americas. Features include crowd flow visualization, isochrone accessibility mapping, amenities demand heatmaps, and multimodal route planning with real-time fare estimation. Ongoing — 3 years of continuous development and maintenance.",
     techs: ["Next.js", "Mapbox", "React", "Real-time"],
     screenshot: "/images/gaudt.png",
     live: null,
@@ -129,6 +129,19 @@ const PROJECTS = [
     screenshot: "/images/leadership-journey.png",
     live: null,
     github: "https://github.com/treeclouds/bat-leadership",
+    nda: true,
+  },
+  {
+    id: 9,
+    name: "Mobadas",
+    title: "Marine Environmental Monitoring System",
+    industry: "Environmental & Marine Technology",
+    description:
+      "Built an interactive marine data visualization platform for Japan's leading infrastructure engineering consultant (Nippon Koei). Features include sea surface temperature heatmaps, time-range filtering, coordinate-based data points, and real-time SST charting across coastal regions. Part of an ongoing environmental monitoring initiative.",
+    techs: ["React", "Leaflet", "Geospatial", "Data Visualization", "REST API"],
+    screenshot: "/images/mobadas.png",
+    live: null,
+    github: null,
     nda: true,
   },
 ];
