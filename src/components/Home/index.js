@@ -192,6 +192,7 @@ export default function Home() {
           alt="tavern"
           $x={bgOffset.x}
           $y={bgOffset.y}
+          fetchpriority="high"
         />
 
         <Overlay />

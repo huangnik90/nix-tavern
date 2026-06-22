@@ -97,7 +97,7 @@ export default function About() {
 
   return (
     <Scene>
-      <BgImage src="/images/tavern-bg.webp" alt="tavern" />
+      <BgImage src="/images/tavern-bg.webp" alt="tavern" fetchpriority="high" />
       <Overlay />
 
       <NixNavbar />
