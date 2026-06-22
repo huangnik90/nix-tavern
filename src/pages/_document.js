@@ -34,8 +34,15 @@ export default class MyDocument extends Document {
             crossOrigin="anonymous"
           />
           <link
+            rel="preload"
+            as="style"
+            href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+          />
+          <link
             href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
             rel="stylesheet"
+            media="print"
+            onLoad="this.media='all'"
           />
         </Head>
         <body>
