@@ -97,7 +97,7 @@ export default function About() {
 
   return (
     <Scene>
-      <BgImage src="/images/tavern-bg.png" alt="tavern" />
+      <BgImage src="/images/tavern-bg.webp" alt="tavern" />
       <Overlay />
 
       <NixNavbar />
@@ -114,7 +114,7 @@ export default function About() {
         <AboutContainer>
           <AboutGrid>
             <CharacterCard>
-              <CharacterImage src="/images/bartender-nix-2.png" alt="Nix" />
+              <CharacterImage src="/images/bartender-nix-2.webp" alt="Nix" />
 
               <CharacterInfo>
                 <div className="name">Nikolas Wijaya</div>

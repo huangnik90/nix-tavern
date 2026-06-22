@@ -49,7 +49,7 @@ export default function App({ Component, pageProps }) {
         />
         <meta
           property="og:image"
-          content="https://www.bynik.my.id/images/og-preview.png"
+          content="https://www.bynik.my.id/images/og-preview.webp"
         />
         <meta property="og:url" content="https://www.bynik.my.id" />
         <meta property="og:type" content="website" />
@@ -63,7 +63,7 @@ export default function App({ Component, pageProps }) {
         />
         <meta
           name="twitter:image"
-          content="https://www.bynik.my.id/images/og-preview.png"
+          content="https://www.bynik.my.id/images/og-preview.webp"
         />
       </Head>
       <Component {...pageProps} />

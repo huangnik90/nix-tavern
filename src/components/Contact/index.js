@@ -62,7 +62,7 @@ export default function Contact() {
 
   return (
     <Scene>
-      <BgImage src="/images/tavern-bg.png" alt="tavern" />
+      <BgImage src="/images/tavern-bg.webp" alt="tavern" />
       <Overlay />
 
       <NixNavbar />

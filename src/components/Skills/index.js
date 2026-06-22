@@ -128,7 +128,7 @@ export default function Skills() {
 
   return (
     <Scene>
-      <BgImage src="/images/tavern-bg.png" alt="tavern" />
+      <BgImage src="/images/tavern-bg.webp" alt="tavern" />
       <Overlay />
       <NixNavbar />
 

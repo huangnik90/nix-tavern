@@ -29,7 +29,7 @@ const PROJECTS = [
     description:
       "Built a full booking platform for a water sports company — real-time seat availability, live updates via Supabase, and interactive hover experiences. Handles lesson scheduling, rentals, and tour bookings end-to-end.",
     techs: ["Next.js", "Supabase", "React", "Real-time"],
-    screenshot: "/images/paddleboard.png",
+    screenshot: "/images/paddleboard.webp",
     live: "https://paddleboard-mu.vercel.app/",
     github: null,
     nda: false,
@@ -42,7 +42,7 @@ const PROJECTS = [
     description:
       "E-commerce platform for selling original paintings. Features artist profiles, curated collections, and a smooth checkout experience. Currently in client review.",
     techs: ["Next.js", "React", "CSS", "E-commerce"],
-    screenshot: "/images/tc-art.png",
+    screenshot: "/images/tc-art.webp",
     live: "https://tc-art.vercel.app/",
     github: null,
     nda: false,
@@ -55,7 +55,7 @@ const PROJECTS = [
     description:
       "Built 20+ pages from scratch for a global urban analytics platform (Nippon Koei) spanning 12+ cities across Asia, Europe, and the Americas. Features include crowd flow visualization, isochrone accessibility mapping, amenities demand heatmaps, and multimodal route planning with real-time fare estimation. Ongoing — 3 years of continuous development and maintenance.",
     techs: ["Next.js", "Mapbox", "React", "Real-time"],
-    screenshot: "/images/gaudt.png",
+    screenshot: "/images/gaudt.webp",
     live: null,
     github: null,
     nda: true,
@@ -68,7 +68,7 @@ const PROJECTS = [
     description:
       "Developed internal web pages for a major insurance enterprise — including an event portal and pre/post-test assessment flows for client-facing programs. Part of a larger agent and policy management platform.",
     techs: ["React", "Redux", "REST API"],
-    screenshot: "/images/allianz.png",
+    screenshot: "/images/allianz.webp",
     live: null,
     github: null,
     nda: true,
@@ -81,7 +81,7 @@ const PROJECTS = [
     description:
       "Contributed to a large-scale internal platform for a leading FMCG company — resolving hundreds of bug tickets and building new registration flows. High-volume codebase with distributor management and internal tooling.",
     techs: ["React", "Redux", "REST API"],
-    screenshot: "/images/bat.png",
+    screenshot: "/images/bat.webp",
     live: null,
     github: null,
     nda: true,
@@ -94,7 +94,7 @@ const PROJECTS = [
     description:
       "Built a mobile web app for Toyota's Dealer Convention in Bali — guests checked in via QR code scan on arrival and were assigned table seats in real-time. Handled live attendance tracking for a large-scale corporate event.",
     techs: ["Next.js", "React", "Mobile Web"],
-    screenshot: "/images/toyota.png",
+    screenshot: "/images/toyota.webp",
     live: null,
     github: null,
     nda: true,
@@ -126,7 +126,7 @@ const PROJECTS = [
       "SharePoint",
       "Power Apps",
     ],
-    screenshot: "/images/leadership-journey.png",
+    screenshot: "/images/leadership-journey.webp",
     live: null,
     github: "https://github.com/treeclouds/bat-leadership",
     nda: true,
@@ -139,7 +139,7 @@ const PROJECTS = [
     description:
       "Built an interactive marine data visualization platform for Japan's leading infrastructure engineering consultant (Nippon Koei). Features include sea surface temperature heatmaps, time-range filtering, coordinate-based data points, and real-time SST charting across coastal regions. Part of an ongoing environmental monitoring initiative.",
     techs: ["React", "Leaflet", "Geospatial", "Data Visualization", "REST API"],
-    screenshot: "/images/mobadas.png",
+    screenshot: "/images/mobadas.webp",
     live: null,
     github: null,
     nda: true,
@@ -153,7 +153,7 @@ export default function Projects() {
   const { playing, toggleMusic } = useMusic();
   return (
     <Scene>
-      <BgImage src="/images/project_2.png" alt="tavern wall" />
+      <BgImage src="/images/project_2.webp" alt="tavern wall" />
       <Overlay />
       <MusicBtn
         $playing={playing}

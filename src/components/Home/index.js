@@ -84,7 +84,7 @@ export default function Home() {
   // ── Preload hover image ──────────────────────────────────────────────────────
   useEffect(() => {
     const img = new Image();
-    img.src = "/images/bartender-nix-2.png";
+    img.src = "/images/bartender-nix-2.webp";
   }, []);
 
   // ── Mouse parallax & glow ────────────────────────────────────────────────────
@@ -188,7 +188,7 @@ export default function Home() {
       <Scene onClick={handleSceneClick}>
         {/* ── Parallax background ── */}
         <BgImage
-          src="/images/tavern-bg.png"
+          src="/images/tavern-bg.webp"
           alt="tavern"
           $x={bgOffset.x}
           $y={bgOffset.y}
@@ -232,12 +232,12 @@ export default function Home() {
         >
           <img
             className="idle"
-            src="/images/bartender-nix-1.png"
+            src="/images/bartender-nix-1.webp"
             alt="bartender"
           />
           <img
             className="glass"
-            src="/images/bartender-nix-2.png"
+            src="/images/bartender-nix-2.webp"
             alt="bartender with glass"
           />
           <div className="glow" />
